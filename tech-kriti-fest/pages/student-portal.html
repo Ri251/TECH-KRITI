@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Account Portal — Tech Kriti 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <i class="fa-solid fa-id-badge text-white text-lg"></i>
+        </div>
+        <div>
+          <span class="font-black text-lg text-white">TECH KRITI</span>
+          <span class="block text-[9px] font-mono text-indigo-400 font-bold uppercase tracking-widest">STUDENT PORTAL</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="../index.html#events" class="text-slate-400 hover:text-white transition">Activities</a>
+        <a href="schedule.html" class="text-slate-400 hover:text-white transition hidden sm:inline">Timeline</a>
+        <a href="register.html" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition">
+          + Register More
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+      <a href="../index.html" class="hover:text-indigo-400">Home</a>
+      <span>/</span>
+      <span class="text-indigo-400 font-medium">Student Account & Passes</span>
+    </div>
+
+    <!-- STATE 1: LOGIN BOX (When no student is active) -->
+    <div id="portal-login-section" class="max-w-md mx-auto my-8 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="text-center space-y-2">
+        <div class="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl mx-auto">
+          <i class="fa-solid fa-user-lock"></i>
+        </div>
+        <h2 class="text-2xl font-black text-white">Student Login</h2>
+        <p class="text-xs text-slate-400">Enter your College Roll Number or registered Email to view your festival ID, registered activities, and digital passes.</p>
+      </div>
+
+      <form id="portal-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Roll Number or Email</label>
+          <div class="relative">
+            <i class="fa-solid fa-graduation-cap absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+            <input id="portal-login-input" type="text" required placeholder="e.g. 23BCS104 or aryan@college.edu" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 font-mono uppercase focus:outline-none focus:border-indigo-500" />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2">
+          <span>Access My Account</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+      </form>
+
+      <!-- Help / New Registration Link -->
+      <div class="pt-4 border-t border-slate-800 text-center space-y-3">
+        <p class="text-xs text-slate-400">Haven't registered for Tech Kriti 2026 yet?</p>
+        <a href="register.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-xs border border-slate-700 transition">
+          <i class="fa-solid fa-ticket"></i>
+          <span>Register Festival Pass (₹50 DSEU / ₹100 Outside)</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- STATE 2: STUDENT DASHBOARD (Shown when student is logged in) -->
+    <div id="portal-dashboard-section" class="hidden space-y-8">
+      
+      <!-- Top Profile Ribbon & Logout -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 border border-slate-800 rounded-3xl p-6">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-500 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-indigo-500/20 shrink-0">
+            <span id="student-avatar-initials">AD</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="student-display-name" class="text-xl sm:text-2xl font-black text-white">Aryan Deshmukh</h2>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">VERIFIED</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5 flex items-center gap-3 flex-wrap">
+              <span id="student-display-roll" class="font-mono text-cyan-400 font-semibold">23BCS104</span>
+              <span>•</span>
+              <span id="student-display-meta">Semester 4 • Section CS-1</span>
+              <span>•</span>
+              <span id="student-display-campus">Main Campus</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <a href="register.html" class="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i> Register Event
+          </a>
+          <button id="btn-student-logout" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold transition">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Passes & Activities Header -->
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-ticket text-indigo-400"></i> My Registered Activities & Passes
+          </h3>
+          <p class="text-xs text-slate-400">All your active digital passes for Tech Kriti 2026 competitions.</p>
+        </div>
+        <span id="student-passes-count" class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-xs font-mono font-bold">
+          1 Pass
+        </span>
+      </div>
+
+      <!-- Passes Cards Container -->
+      <div id="student-passes-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Injected dynamically -->
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>© 2026 Tech Kriti Organizing Committee • Student Self-Service Portal</p>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/ticket.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginSection = document.getElementById("portal-login-section");
+      const dashSection = document.getElementById("portal-dashboard-section");
+      const loginForm = document.getElementById("portal-login-form");
+      const loginInput = document.getElementById("portal-login-input");
+      const logoutBtn = document.getElementById("btn-student-logout");
+
+      // Check current session or URL param
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryRoll = urlParams.get("roll");
+
+      if (queryRoll) {
+        authenticateStudent(queryRoll);
+      } else {
+        const existingStudent = StorageManager.getCurrentStudent();
+        if (existingStudent && existingStudent.rollNumber) {
+          loadStudentDashboard(existingStudent.rollNumber);
+        }
+      }
+
+      // Login form submit
+      loginForm.onsubmit = (e) => {
+        e.preventDefault();
+        const term = loginInput.value.trim();
+        if (term) authenticateStudent(term);
+      };
+
+      // Logout handler
+      logoutBtn.onclick = () => {
+        StorageManager.setCurrentStudent(null);
+        loginSection.classList.remove("hidden");
+        dashSection.classList.add("hidden");
+        loginInput.value = "";
+      };
+
+      function authenticateStudent(term) {
+        const registrations = StorageManager.getStudentRegistrations(term);
+        if (registrations.length > 0) {
+          const student = registrations[0].student;
+          StorageManager.setCurrentStudent(student);
+          loadStudentDashboard(student.rollNumber);
+        } else {
+          alert(`No active registration found for "${term}". Please ensure you entered the exact Roll Number or Email used during payment.`);
+        }
+      }
+
+      function loadStudentDashboard(rollNumber) {
+        const registrations = StorageManager.getStudentRegistrations(rollNumber);
+        if (registrations.length === 0) return;
+
+        const student = registrations[0].student;
+        const isDseu = student.tier === "dseu" || registrations.some(r => Number(r.amountPaid) === 50);
+
+        loginSection.classList.add("hidden");
+        dashSection.classList.remove("hidden");
+
+        // Profile fields
+        document.getElementById("student-display-name").textContent = student.name;
+        document.getElementById("student-display-roll").textContent = student.rollNumber;
+        document.getElementById("student-display-meta").textContent = `${student.semester || 'Semester'} • Sec ${student.section || 'A'}`;
+        document.getElementById("student-display-campus").textContent = isDseu ? (student.campus || 'DSEU Campus') : (student.campus || 'Outside University');
+        
+        const initials = student.name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+        document.getElementById("student-avatar-initials").textContent = initials || "TK";
+
+        document.getElementById("student-passes-count").textContent = `${registrations.length} ${registrations.length === 1 ? 'Pass' : 'Passes'}`;
+
+        // Render pass cards
+        const container = document.getElementById("student-passes-grid");
+        container.innerHTML = "";
+
+        registrations.forEach(reg => {
+          const isCheckedIn = !!reg.checkedIn;
+          const isVerified = reg.paymentVerification && reg.paymentVerification.toLowerCase().includes("verified");
+          const card = document.createElement("div");
+          card.className = "bg-slate-900 border border-slate-800 rounded-3xl p-6 glow-card flex flex-col justify-between space-y-4";
+          
+          card.innerHTML = `
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${isDseu ? 'bg-cyan-500/10 text-cyan-300 border border-cyan-500/20' : 'bg-amber-500/10 text-amber-300 border border-amber-500/20'}">
+                  ${isDseu ? 'DSEU Student (₹50)' : 'Outside Student (₹100)'}
+                </span>
+                ${isCheckedIn 
+                  ? `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-slate-950"><i class="fa-solid fa-check mr-1"></i> GATE ADMITTED</span>`
+                  : `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/10 text-indigo-300 border border-indigo-500/30">FESTIVAL PASS</span>`
+                }
+              </div>
+
+              <div>
+                <h4 class="text-xl font-bold text-white">${reg.activityTitle}</h4>
+                <p class="font-mono text-xs text-cyan-400 mt-1">${reg.ticketNumber}</p>
+              </div>
+
+              <div class="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-2 text-slate-300">
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500">UPI Ref / UTR:</span>
+                  <span class="font-mono text-cyan-300 font-bold select-all">${reg.utrNumber || reg.transactionId || 'Pending'}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500">Payment Status:</span>
+                  <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                    isVerified ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                  }">
+                    ${isVerified ? '✅ Verified by Admin' : '⏳ Pending Admin Check'}
+                  </span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500">Amount Paid:</span>
+                  <span class="font-bold text-emerald-400">₹${reg.amountPaid}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-slate-500">UPI Payee:</span>
+                  <span class="text-slate-300 font-medium">Rishab Kumar Jha</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
+              <a href="ticket.html?id=${encodeURIComponent(reg.id)}" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold text-xs shadow-md text-center transition flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Open Digital Pass & Barcode</span>
+              </a>
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

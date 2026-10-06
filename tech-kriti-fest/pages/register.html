@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festival Entry Pass Registration — Tech Kriti 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <i class="fa-solid fa-ticket text-slate-950 font-black text-lg"></i>
+        </div>
+        <div>
+          <span class="font-black text-lg text-white">TECH KRITI</span>
+          <span class="block text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-widest">OFFICIAL ENTRY PASS</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="events.html" class="text-slate-400 hover:text-white transition">All Competitions</a>
+        <a href="schedule.html" class="text-slate-400 hover:text-white transition hidden sm:inline">Timeline</a>
+        <a href="student-portal.html" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">My Passes</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+      <a href="../index.html" class="hover:text-cyan-400">Home</a>
+      <span>/</span>
+      <span class="text-cyan-400 font-medium">Festival Entry Pass Registration</span>
+    </div>
+
+    <!-- Title Header -->
+    <div class="mb-8">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
+          ONE-TIME FESTIVAL ENTRY PASS • 100% FREE EVENTS
+        </span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-black text-white">Get Your Festival Entry Pass</h1>
+      <p class="text-sm text-slate-400 mt-2 max-w-2xl leading-relaxed">
+        One-time festival entry fee only: <strong>₹50 for DSEU Campus Students</strong> and <strong>₹100 for Outside College Students</strong>. Once your pass is active, entry to the campus, all stages, and all 10 competitions is completely free!
+      </p>
+    </div>
+
+    <!-- Registration Card -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <form id="general-registration-form" class="space-y-6">
+        
+        <!-- STEP 1: STUDENT TIER SELECTOR -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider font-mono">
+            1. Select Your Student Category <span class="text-rose-400">*</span>
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <label id="tier-label-dseu" class="cursor-pointer p-4 rounded-2xl border-2 border-cyan-500 bg-cyan-950/20 flex items-start justify-between gap-3 transition">
+              <div class="flex items-start gap-3">
+                <input type="radio" name="studentCategory" value="dseu" checked class="mt-1 text-cyan-500" />
+                <div>
+                  <strong class="text-white text-sm block">🎓 DSEU Campus Student</strong>
+                  <span class="text-xs text-slate-400 block mt-0.5">Valid for any DSEU Delhi campus</span>
+                  <span class="inline-block mt-2 text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    Includes Full Access to All 10 Events
+                  </span>
+                </div>
+              </div>
+              <span class="text-2xl font-black text-cyan-400 font-mono">₹50</span>
+            </label>
+
+            <label id="tier-label-outside" class="cursor-pointer p-4 rounded-2xl border-2 border-slate-800 bg-slate-950 flex items-start justify-between gap-3 transition">
+              <div class="flex items-start gap-3">
+                <input type="radio" name="studentCategory" value="outside" class="mt-1 text-indigo-500" />
+                <div>
+                  <strong class="text-white text-sm block">🌐 Outside College Student</strong>
+                  <span class="text-xs text-slate-400 block mt-0.5">DU, IPU, DTU, NSUT, Jamia, AKTU, etc.</span>
+                  <span class="inline-block mt-2 text-[11px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">
+                    Includes Full Access to All 10 Events
+                  </span>
+                </div>
+              </div>
+              <span class="text-2xl font-black text-indigo-400 font-mono">₹100</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- STEP 2: STUDENT PROFILE -->
+        <div class="space-y-4 pt-4 border-t border-slate-800">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs uppercase font-mono font-bold text-cyan-300 flex items-center gap-2">
+              <i class="fa-solid fa-user-graduate"></i> 2. Student Details
+            </h3>
+            <span class="text-[11px] text-slate-500">* All fields required</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Full Student Name <span class="text-rose-400">*</span></label>
+              <input type="text" name="name" required placeholder="e.g. Aryan Deshmukh" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">College Roll Number / Student ID <span class="text-rose-400">*</span></label>
+              <input type="text" name="rollNumber" required placeholder="e.g. 23BCS104" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 font-mono uppercase focus:outline-none focus:border-cyan-500" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address <span class="text-rose-400">*</span></label>
+              <input type="email" name="email" required placeholder="student@college.edu" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Phone Number (WhatsApp) <span class="text-rose-400">*</span></label>
+              <input type="tel" name="phone" required placeholder="+91 98765 43210" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 font-mono focus:outline-none focus:border-cyan-500" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Semester <span class="text-rose-400">*</span></label>
+              <select name="semester" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-cyan-500">
+                <option value="Semester 1">Semester 1</option>
+                <option value="Semester 2">Semester 2</option>
+                <option value="Semester 3">Semester 3</option>
+                <option value="Semester 4" selected>Semester 4</option>
+                <option value="Semester 5">Semester 5</option>
+                <option value="Semester 6">Semester 6</option>
+                <option value="Semester 7">Semester 7</option>
+                <option value="Semester 8">Semester 8</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Section <span class="text-rose-400">*</span></label>
+              <input type="text" name="section" required placeholder="e.g. A, B, CS-1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 uppercase focus:outline-none focus:border-cyan-500" value="A" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Campus / College <span class="text-rose-400">*</span></label>
+              <select name="campus" id="campus-select" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-cyan-500">
+                <option value="DSEU Okhla-I Campus (Main)" selected>DSEU Okhla-I Campus (Main)</option>
+                <option value="DSEU Okhla-II Campus">DSEU Okhla-II Campus</option>
+                <option value="DSEU Dwarka Campus">DSEU Dwarka Campus</option>
+                <option value="DSEU Shakarpur Campus">DSEU Shakarpur Campus</option>
+                <option value="DSEU Pusa Campus">DSEU Pusa Campus</option>
+                <option value="DSEU Rohini Campus">DSEU Rohini Campus</option>
+                <option value="DSEU Siri Fort Campus">DSEU Siri Fort Campus</option>
+               <option value="DSEU Siri Fort Campus">DSEU Rajokri Campus</option>
+                <option value="DSEU Siri Fort Campus">DSEU Ambedkar Campus</option>
+              <option value="DSEU Siri Fort Campus">DSEU Bhi Parmanand Campus</option>
+                <option value="DSEU Siri Fort Campus">Other DSEU Campus</option>
+                <option value="Outside College / Non-DSEU Student">Outside College / Non-DSEU Student</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASS BENEFITS & PERKS (STREAMLINED & BETTER LAYOUT) -->
+        <div class="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs uppercase font-mono font-bold text-cyan-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-star text-amber-400"></i> What Your Entry Pass Unlocks
+            </span>
+            <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+              ALL-INCLUSIVE
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-circle-check text-cyan-400 mt-0.5"></i>
+              <div>
+                <strong class="text-white block">Full Campus Access</strong>
+                <span class="text-slate-400 text-[11px]">Valid for both Pre-Events (22 Oct) & Main Event Day (23 Oct).</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-circle-check text-emerald-400 mt-0.5"></i>
+              <div>
+                <strong class="text-white block">All 10 Competitions Free</strong>
+                <span class="text-slate-400 text-[11px]">Register for any event on its dedicated page at ₹0 additional cost.</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-circle-check text-pink-400 mt-0.5"></i>
+              <div>
+                <strong class="text-white block">Open DJ Night Entry</strong>
+                <span class="text-slate-400 text-[11px]">Includes high-energy festival DJ celebration and afterparty.</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-circle-check text-indigo-400 mt-0.5"></i>
+              <div>
+                <strong class="text-white block">Official Digital Pass & QR</strong>
+                <span class="text-slate-400 text-[11px]">Instant download, barcode, print format, and mobile gate scanner pass.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-800/80 flex items-center gap-2 text-[11px] text-slate-400">
+            <i class="fa-solid fa-circle-info text-cyan-400"></i>
+            <span>Want to enter specific competitions like Coding, Dance, or Carrom? You can register directly on each competition's page for free once you have this entry pass!</span>
+          </div>
+        </div>
+
+        <!-- TOTAL FEE & UPI SUMMARY -->
+        <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-mono">One-Time Payable Entry Fee</span>
+            <div class="flex items-baseline gap-2">
+              <span id="reg-total-fee" class="text-3xl font-black text-cyan-400 font-mono">₹50</span>
+              <span class="text-xs text-emerald-400 font-medium">No hidden or per-event fees</span>
+            </div>
+          </div>
+          <div class="text-xs text-slate-400 text-center sm:text-right">
+            <span class="text-sky-300 font-semibold block flex items-center justify-center sm:justify-end gap-1">
+              <i class="fa-solid fa-qrcode text-sky-400"></i> Direct Paytm UPI to Rishab Kumar Jha
+            </span>
+            <span class="text-[11px]">Instant pass delivery with 12-digit UTR</span>
+          </div>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <div>
+          <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-black text-base shadow-xl shadow-cyan-500/20 transition transform active:scale-[0.99] flex items-center justify-center gap-2">
+            <i class="fa-solid fa-qrcode"></i>
+            <span id="btn-submit-text">Pay ₹50 via UPI & Get Official Pass</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>© 2026 Tech Kriti Organizing Committee • DSEU</p>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/payment.js"></script>
+  <script src="../js/ticket.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const totalFeeDisplay = document.getElementById("reg-total-fee");
+      const submitBtnText = document.getElementById("btn-submit-text");
+      const dseuRadio = document.getElementById("tier-label-dseu");
+      const outsideRadio = document.getElementById("tier-label-outside");
+      const campusSelect = document.getElementById("campus-select");
+
+      let currentFee = 50;
+      let currentCategory = "dseu";
+
+      // Check query params
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("tier") === "outside") {
+        selectTier("outside");
+      }
+
+      function selectTier(tier) {
+        currentCategory = tier;
+        currentFee = tier === "dseu" ? 50 : 100;
+        
+        const radioD = document.querySelector('input[name="studentCategory"][value="dseu"]');
+        const radioO = document.querySelector('input[name="studentCategory"][value="outside"]');
+
+        if (tier === "dseu") {
+          radioD.checked = true;
+          dseuRadio.classList.add("border-cyan-500", "bg-cyan-950/20");
+          dseuRadio.classList.remove("border-slate-800", "bg-slate-950");
+          outsideRadio.classList.remove("border-indigo-500", "bg-indigo-950/20");
+          outsideRadio.classList.add("border-slate-800", "bg-slate-950");
+          if (campusSelect.value === "Outside College / Non-DSEU Student") {
+            campusSelect.selectedIndex = 0;
+          }
+        } else {
+          radioO.checked = true;
+          outsideRadio.classList.add("border-indigo-500", "bg-indigo-950/20");
+          outsideRadio.classList.remove("border-slate-800", "bg-slate-950");
+          dseuRadio.classList.remove("border-cyan-500", "bg-cyan-950/20");
+          dseuRadio.classList.add("border-slate-800", "bg-slate-950");
+          campusSelect.value = "Outside College / Non-DSEU Student";
+        }
+
+        totalFeeDisplay.textContent = `₹${currentFee}`;
+        submitBtnText.textContent = `Pay ₹${currentFee} via UPI & Get Official Pass`;
+      }
+
+      dseuRadio.onclick = () => selectTier("dseu");
+      outsideRadio.onclick = () => selectTier("outside");
+
+      // Auto update tier if campus selection changes
+      campusSelect.onchange = () => {
+        if (campusSelect.value.includes("Outside")) {
+          selectTier("outside");
+        } else {
+          selectTier("dseu");
+        }
+      };
+
+      // Handle Submit
+      const form = document.getElementById("general-registration-form");
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        const fd = new FormData(form);
+
+        const studentData = {
+          name: fd.get("name"),
+          rollNumber: fd.get("rollNumber"),
+          email: fd.get("email"),
+          phone: fd.get("phone"),
+          semester: fd.get("semester"),
+          section: fd.get("section"),
+          campus: fd.get("campus"),
+          tier: currentCategory
+        };
+
+        try {
+          const paymentResult = await PaymentEngine.startPayment({
+            title: currentCategory === "dseu" ? "DSEU Campus Festival Entry Pass" : "Outside College Festival Entry Pass",
+            activityId: "universal-entry-pass",
+            category: "Festival Entry Pass",
+            studentCategory: currentCategory,
+            amount: currentFee,
+            student: studentData,
+            customData: {
+              accessType: "Universal Festival Entry Pass (All 10 Events Included)",
+              validDates: "22 & 23 October 2026"
+            }
+          });
+
+          if (paymentResult && paymentResult.success) {
+            const regRecord = StorageManager.saveRegistration({
+              student: studentData,
+              activityId: "universal-entry-pass",
+              activityTitle: "Official Tech Kriti Festival Pass",
+              category: "Festival Pass",
+              amountPaid: paymentResult.amountPaid,
+              utrNumber: paymentResult.utrNumber,
+              paymentMethod: paymentResult.paymentMethod,
+              paymentStatus: "Completed",
+              paymentVerification: "Pending Verification",
+              transactionId: paymentResult.transactionId,
+              customData: {
+                studentTier: currentCategory === "dseu" ? "DSEU Campus (₹50)" : "Outside College (₹100)",
+                accessLevel: "All 10 Events + Open DJ Night Included"
+              }
+            });
+
+            window.location.href = `ticket.html?id=${encodeURIComponent(regRecord.id)}`;
+          }
+        } catch (err) {
+          console.log("Payment canceled", err);
+        }
+      };
+    });
+  </script>
+</body>
+</html>

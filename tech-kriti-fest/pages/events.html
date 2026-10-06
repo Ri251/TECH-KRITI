@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Activities & Competitions — Tech Kriti 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <i class="fa-solid fa-cubes-stacked text-slate-950 text-lg"></i>
+        </div>
+        <div>
+          <span class="font-black text-lg text-white">TECH KRITI</span>
+          <span class="block text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-widest">ACTIVITIES DIRECTORY</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="schedule.html" class="text-slate-400 hover:text-white transition">Timeline</a>
+        <a href="register.html" class="text-cyan-400 hover:underline">General Register</a>
+        <a href="student-portal.html" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">My Passes</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-8">
+    
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+      <a href="../index.html" class="hover:text-cyan-400">Home</a>
+      <span>/</span>
+      <span class="text-cyan-400 font-medium">All Activities</span>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <span class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-bold block mb-1">02 • DEDICATED ACTIVITY PAGES</span>
+        <h1 class="text-3xl sm:text-4xl font-black text-white">All Flagship Activities & Competitions</h1>
+        <p class="text-sm text-slate-400 mt-1 max-w-2xl">
+          Each activity features its own dedicated registration page, rules, team configurations, and schedules.
+        </p>
+      </div>
+
+      <div class="w-full md:w-72">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+          <input id="events-dir-search" type="text" placeholder="Search by name, category, or format..." class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs font-semibold" id="category-filter-bar">
+      <button class="dir-filter-btn active px-4 py-2 rounded-xl bg-cyan-600 text-white shadow-md shadow-cyan-600/20 whitespace-nowrap" data-filter="all">All (10)</button>
+      <button class="dir-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Technical">Technical</button>
+      <button class="dir-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Cultural">Cultural</button>
+      <button class="dir-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Sports & Gaming">Sports & Gaming</button>
+      <button class="dir-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Literary & Arts">Literary & Arts</button>
+      <button class="dir-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Creative & Arts">Cosplay & Creative</button>
+      <button class="dir-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Brain & Mind">Mind Challenge</button>
+    </div>
+
+    <!-- Activities Grid -->
+    <div id="events-dir-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected by script -->
+    </div>
+
+  </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>© 2026 Tech Kriti Organizing Committee • Activities Directory</p>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("events-dir-grid");
+      const searchInput = document.getElementById("events-dir-search");
+      const filterBtns = document.querySelectorAll(".dir-filter-btn");
+
+      let currentFilter = "all";
+
+      function render(filter = "all", query = "") {
+        container.innerHTML = "";
+        const activities = window.TECH_KRITI_DATA ? window.TECH_KRITI_DATA.activities : [];
+
+        const filtered = activities.filter(act => {
+          const matchCat = filter === "all" || act.category === filter;
+          const matchQ = !query || 
+            act.title.toLowerCase().includes(query) || 
+            act.description.toLowerCase().includes(query) ||
+            act.category.toLowerCase().includes(query);
+          return matchCat && matchQ;
+        });
+
+        filtered.forEach(act => {
+          const card = document.createElement("div");
+          card.className = "bg-slate-900 border border-slate-800 rounded-3xl p-6 glow-card flex flex-col justify-between space-y-4";
+
+          const timing = act.schedule && act.schedule.length ? `${act.schedule[0].day} • ${act.schedule[0].time}` : "Oct 22-23";
+
+          // Since we are in pages/ directory, relative path for registrationUrl should just be basename
+          const regHref = act.registrationUrl.replace("pages/", "");
+
+          card.innerHTML = `
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-slate-800 text-cyan-300 border border-slate-700/80 flex items-center gap-1.5">
+                  <i class="fa-solid ${act.icon || 'fa-star'} text-cyan-400"></i> ${act.category}
+                </span>
+                <span class="text-[11px] font-semibold text-amber-400 flex items-center gap-1">
+                  <i class="fa-solid fa-award text-[11px]"></i> Trophies & Medals
+                </span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-bold text-white">${act.title}</h3>
+                <p class="text-xs text-slate-400 mt-2 leading-relaxed">${act.description}</p>
+              </div>
+
+              <div class="pt-2 border-t border-slate-800/80 space-y-1.5 text-xs text-slate-300">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-slate-500"><i class="fa-regular fa-clock text-cyan-400 mr-1.5"></i> Slot</span>
+                  <span class="font-medium text-slate-300">${timing}</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-slate-500"><i class="fa-solid fa-users text-indigo-400 mr-1.5"></i> Format</span>
+                  <span class="font-medium text-slate-300">${act.teamType}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block">Event Entry</span>
+                <span class="text-sm font-black text-emerald-400 flex items-center gap-1">
+                  <i class="fa-solid fa-gift text-xs"></i> 100% FREE
+                </span>
+                <span class="text-[9px] text-slate-400 font-mono">with Fest Pass (₹50/₹100)</span>
+              </div>
+
+              <a href="${regHref}" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-cyan-600/20 transition flex items-center gap-1.5">
+                <span>View & Register</span>
+                <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      }
+
+      render();
+
+      searchInput.oninput = () => {
+        render(currentFilter, searchInput.value.toLowerCase().trim());
+      };
+
+      filterBtns.forEach(btn => {
+        btn.onclick = () => {
+          filterBtns.forEach(b => {
+            b.classList.remove("active", "bg-cyan-600", "text-white", "shadow-md");
+            b.classList.add("bg-slate-900", "text-slate-400");
+          });
+          btn.classList.add("active", "bg-cyan-600", "text-white", "shadow-md");
+          btn.classList.remove("bg-slate-900", "text-slate-400");
+
+          currentFilter = btn.getAttribute("data-filter");
+          render(currentFilter, searchInput.value.toLowerCase().trim());
+        };
+      });
+    });
+  </script>
+</body>
+</html>

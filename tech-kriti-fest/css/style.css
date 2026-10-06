@@ -1,0 +1,212 @@
+/* TECH KRITI 2026 - Master Futuristic Festival Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700;900&display=swap');
+
+:root {
+  --bg-deep: #040711;
+  --bg-surface: #090e1c;
+  --bg-card: #0d1428;
+  --primary-cyan: #06b6d4;
+  --primary-indigo: #6366f1;
+  --primary-purple: #a855f7;
+  --accent-pink: #ec4899;
+  --accent-emerald: #10b981;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-deep);
+  color: #f1f5f9;
+  overflow-x: hidden;
+  position: relative;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(6, 182, 212, 0.08) 0px, transparent 40%),
+    radial-gradient(at 85% 25%, rgba(168, 85, 247, 0.08) 0px, transparent 40%),
+    radial-gradient(at 50% 75%, rgba(236, 72, 153, 0.06) 0px, transparent 45%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+code, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Cyber Matrix Background Grid */
+.cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #040711;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(13, 20, 40, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-header {
+  background: rgba(4, 7, 17, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Holographic & Glow Effects */
+.glow-card {
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: rgba(13, 20, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.glow-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 15px 35px -10px rgba(6, 182, 212, 0.3), 0 0 20px rgba(6, 182, 212, 0.1) inset;
+}
+
+/* Pass Card Hologram Badges */
+.pass-hologram-dseu {
+  position: relative;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(99, 102, 241, 0.08) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.25);
+  transition: all 0.35s ease;
+}
+.pass-hologram-dseu:hover {
+  transform: translateY(-6px);
+  border-color: rgba(6, 182, 212, 0.8);
+  box-shadow: 0 20px 50px -10px rgba(6, 182, 212, 0.4);
+}
+
+.pass-hologram-outside {
+  position: relative;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(236, 72, 153, 0.08) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  box-shadow: 0 10px 40px -10px rgba(168, 85, 247, 0.25);
+  transition: all 0.35s ease;
+}
+.pass-hologram-outside:hover {
+  transform: translateY(-6px);
+  border-color: rgba(168, 85, 247, 0.8);
+  box-shadow: 0 20px 50px -10px rgba(168, 85, 247, 0.4);
+}
+
+/* Gradient Text */
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-festival {
+  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 30%, #c084fc 70%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Shimmer Sweep Animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer-badge {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.03) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Neon Pulse Animation */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.4), 0 0 30px rgba(6, 182, 212, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.7), 0 0 50px rgba(6, 182, 212, 0.4);
+  }
+}
+.neon-glow-btn {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+/* QR Code Frame Scanner Line */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.qr-scanner-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
+  box-shadow: 0 0 10px #06b6d4;
+  animation: scanline 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shake Animation for Invalid Auth */
+@keyframes authShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-9px); }
+  40%, 80% { transform: translateX(9px); }
+}
+.animate-shake {
+  animation: authShake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, .print\:hidden, #mobile-menu, #btn-print-pass {
+    display: none !important;
+  }
+  #techkriti-pass-card {
+    border: 2px solid #000 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0 auto !important;
+  }
+  #techkriti-pass-card * {
+    color: #000 !important;
+    border-color: #ddd !important;
+    background: transparent !important;
+  }
+  #ticket-qr-canvas-wrapper {
+    background: #fff !important;
+    padding: 4px !important;
+  }
+}

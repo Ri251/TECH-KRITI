@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECH KRITI 2026 — Annual Tech & Cultural Festival | DSEU</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- QRCode.js & Canvas Confetti -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+  <!-- ================= TOP NOTICE BAR ================= -->
+  <div class="bg-gradient-to-r from-sky-900/70 via-blue-900/70 to-indigo-900/70 border-b border-sky-500/20 py-2 px-4 text-center text-xs text-sky-200 flex items-center justify-center gap-2 flex-wrap">
+    <span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+    <span class="font-bold">TECH KRITI 2026 REGISTRATIONS LIVE!</span>
+    <span>•</span>
+    <span class="font-semibold text-emerald-300">🎓 DSEU Students: ₹50</span>
+    <span>•</span>
+    <span class="font-semibold text-cyan-300">🌐 Outside Students: ₹100</span>
+    <span>•</span>
+    <span class="font-bold text-amber-300">⚡ All 10 Events 100% FREE with Entry Pass!</span>
+  </div>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition">
+          <i class="fa-solid fa-bolt text-slate-950 font-black text-xl"></i>
+        </div>
+        <div>
+          <span class="font-black text-xl tracking-tight bg-gradient-to-r from-white via-cyan-200 to-indigo-300 bg-clip-text text-transparent">TECH KRITI</span>
+          <span class="block text-[10px] tracking-widest uppercase font-mono text-cyan-400 font-semibold">ANNUAL FEST 2026</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-300">
+        <a href="#pricing" class="hover:text-cyan-400 transition text-emerald-400 font-bold">Pass Pricing</a>
+        <a href="#events" class="hover:text-cyan-400 transition">All 10 Events</a>
+        <a href="pages/schedule.html" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+          <i class="fa-regular fa-calendar-days text-xs text-cyan-400"></i> Timeline (22-23 Oct)
+        </a>
+        <a href="pages/register.html" class="hover:text-cyan-400 transition">Get Entry Pass</a>
+        <a href="pages/student-portal.html" class="hover:text-cyan-400 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-ticket text-xs text-indigo-400"></i> My Passes
+        </a>
+        <a href="pages/admin.html" class="text-xs text-slate-400 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700 hover:border-slate-500 transition">
+          <i class="fa-solid fa-shield-halved text-[10px]"></i> Organizer Admin
+        </a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="pages/register.html" class="relative group overflow-hidden rounded-xl p-px font-semibold text-xs shadow-lg shadow-cyan-500/20">
+          <span class="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 rounded-xl group-hover:opacity-90 transition"></span>
+          <span class="relative px-4 py-2.5 rounded-[11px] bg-slate-950 block transition group-hover:bg-opacity-0 text-white font-bold flex items-center gap-2">
+            <span>Get Entry Pass</span>
+            <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition"></i>
+          </span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white p-2 rounded-lg bg-slate-800 border border-slate-700">
+        <i class="fa-solid fa-bars text-lg"></i>
+      </button>
+
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 py-4 space-y-3">
+      <a href="#pricing" class="block py-2 text-sm font-medium text-emerald-400 font-bold">Entry Pass Pricing (₹50 / ₹100)</a>
+      <a href="#events" class="block py-2 text-sm font-medium text-slate-300 hover:text-cyan-400">All 10 Events (100% Free)</a>
+      <a href="pages/schedule.html" class="block py-2 text-sm font-medium text-slate-300 hover:text-cyan-400">Event Timeline (22 & 23 Oct)</a>
+      <a href="pages/register.html" class="block py-2 text-sm font-medium text-cyan-400 font-bold">Get Festival Entry Pass</a>
+      <a href="pages/student-portal.html" class="block py-2 text-sm font-medium text-indigo-400">Student Portal (View Pass)</a>
+      <a href="pages/admin.html" class="block py-2 text-sm font-medium text-slate-400">Organizer Dashboard</a>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="relative pt-12 pb-20 overflow-hidden hero-mesh">
+    <!-- Ambient Neon Lighting Orbs -->
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-cyan-500/20 via-indigo-600/25 to-pink-500/20 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute top-1/2 -left-20 w-[350px] h-[350px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute top-1/2 -right-20 w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="max-w-3xl mx-auto text-center space-y-6">
+        
+        <!-- Live Badges -->
+        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-cyan-400/30 text-cyan-300 text-xs font-semibold backdrop-blur-xl shadow-lg shadow-cyan-500/10 mb-2 flex-wrap justify-center">
+          <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          <span class="font-bold text-white uppercase tracking-wider">Tech Kriti 2026</span>
+          <span class="text-cyan-500">•</span>
+          <span class="text-slate-300">22 & 23 October</span>
+          <span class="text-cyan-500">•</span>
+          <span class="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">All Events 100% Free</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06] font-display">
+          Ignite The Spark at <br />
+          <span class="gradient-text-festival">TECH KRITI 2026</span>
+        </h1>
+
+        <!-- Subheading with Pricing -->
+        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          One-time festival entry fee only (<strong class="text-cyan-300">₹50 for DSEU</strong> / <strong class="text-purple-300">₹100 for Outside Colleges</strong>). Gain all-inclusive access to all 10 competitions — Prompt Engineering, Front End Sprint, Dance, Singing, Carrom, Cosplay, Poetry, Debate & the Open DJ Night!
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a href="pages/register.html" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-black text-sm shadow-xl shadow-cyan-500/30 transition transform hover:-translate-y-1 flex items-center justify-center gap-2.5">
+            <i class="fa-solid fa-ticket text-base"></i>
+            <span>Get Festival Entry Pass</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+          <a href="pages/schedule.html" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-sm transition flex items-center justify-center gap-2 backdrop-blur-md">
+            <i class="fa-regular fa-clock text-cyan-400"></i>
+            <span>Event Timeline (22-23 Oct)</span>
+          </a>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="pt-6">
+          <span class="text-[11px] uppercase font-mono tracking-widest text-slate-400 block mb-3 font-semibold">Countdown to Festival Kickoff (22 Oct • 12:00 PM)</span>
+          <div id="countdown-pre" class="flex justify-center">
+            <!-- Rendered by js/app.js -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Stats Bar with Glassmorphic Glow -->
+      <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="glass-panel glow-card p-5 rounded-2xl text-center border border-cyan-500/20 hover:border-cyan-500/50">
+          <span class="block text-3xl sm:text-4xl font-black text-cyan-400 font-mono tracking-tight">₹50</span>
+          <span class="text-xs text-slate-300 font-semibold block mt-1">DSEU Students Pass</span>
+          <span class="text-[10px] text-cyan-400/80 font-mono">One-Time Entry</span>
+        </div>
+        <div class="glass-panel glow-card p-5 rounded-2xl text-center border border-purple-500/20 hover:border-purple-500/50">
+          <span class="block text-3xl sm:text-4xl font-black text-purple-400 font-mono tracking-tight">₹100</span>
+          <span class="text-xs text-slate-300 font-semibold block mt-1">Outside Students Pass</span>
+          <span class="text-[10px] text-purple-400/80 font-mono">All Universities</span>
+        </div>
+        <div class="glass-panel glow-card p-5 rounded-2xl text-center border border-emerald-500/20 hover:border-emerald-500/50">
+          <span class="block text-3xl sm:text-4xl font-black text-emerald-400 font-mono tracking-tight">100% FREE</span>
+          <span class="text-xs text-slate-300 font-semibold block mt-1">All 10 Competitions</span>
+          <span class="text-[10px] text-emerald-400/80 font-mono">With Entry Pass</span>
+        </div>
+        <div class="glass-panel glow-card p-5 rounded-2xl text-center border border-amber-500/20 hover:border-amber-500/50">
+          <span class="block text-3xl sm:text-4xl font-black text-amber-400 font-mono tracking-tight">10 Events</span>
+          <span class="text-xs text-slate-300 font-semibold block mt-1">Trophies & Badges</span>
+          <span class="text-[10px] text-amber-400/80 font-mono">Official Certificates</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PRICING & OFFICIAL UPI QR SECTION ================= -->
+  <section id="pricing" class="py-16 bg-slate-950/90 border-y border-slate-800/80 relative cyber-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="px-3.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 inline-block mb-3">
+          ONE-TIME FESTIVAL ENTRY FEE • ALL COMPETITIONS FREE
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-black text-white font-display">Festival Entry Passes</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2.5 leading-relaxed">
+          Pay once using the official Paytm UPI QR code, enter your 12-digit UTR reference number, and activate your all-inclusive festival pass!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch max-w-5xl mx-auto">
+        
+        <!-- CARD 1: DSEU CAMPUS STUDENTS (₹50) -->
+        <div class="pass-hologram-dseu rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 relative overflow-hidden backdrop-blur-xl">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 font-mono">
+                DSEU STUDENT PASS
+              </span>
+              <span class="text-xs font-mono text-cyan-400 font-bold">One-Time Fee</span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-black text-white font-display">DSEU Campus Pass</h3>
+              <p class="text-xs text-slate-300 mt-1 leading-relaxed">Valid for any student currently enrolled in any DSEU Delhi campus.</p>
+            </div>
+
+            <div class="pt-2 flex items-baseline gap-2">
+              <span class="text-5xl font-black text-cyan-400 font-mono tracking-tight">₹50</span>
+              <span class="text-xs text-slate-400 font-semibold">/ student</span>
+            </div>
+
+            <ul class="text-xs space-y-2.5 text-slate-200 pt-3 border-t border-cyan-500/20">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Full Access to Both Days (22 & 23 Oct)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Free Participation in All 10 Events</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Entry to Open DJ Celebration</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Official Scannable QR & Barcode Pass</li>
+            </ul>
+          </div>
+
+          <a href="pages/register.html?tier=dseu" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-black text-xs text-center transition block shadow-lg shadow-cyan-500/30">
+            Get DSEU Pass (₹50)
+          </a>
+        </div>
+
+        <!-- CARD 2: OUTSIDE / OTHER COLLEGES (₹100) -->
+        <div class="pass-hologram-outside rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 relative overflow-hidden backdrop-blur-xl">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-purple-500/20 text-purple-300 border border-purple-400/30 font-mono">
+                OUTSIDE COLLEGE PASS
+              </span>
+              <span class="text-xs font-mono text-purple-400 font-bold">One-Time Fee</span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-black text-white font-display">Outside Student Pass</h3>
+              <p class="text-xs text-slate-300 mt-1 leading-relaxed">For students visiting from DU, IPU, DTU, NSUT, Jamia, AKTU, and other universities.</p>
+            </div>
+
+            <div class="pt-2 flex items-baseline gap-2">
+              <span class="text-5xl font-black text-purple-400 font-mono tracking-tight">₹100</span>
+              <span class="text-xs text-slate-400 font-semibold">/ student</span>
+            </div>
+
+            <ul class="text-xs space-y-2.5 text-slate-200 pt-3 border-t border-purple-500/20">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Full Access to Both Days (22 & 23 Oct)</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Free Participation in All 10 Events</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Entry to Open DJ Celebration</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i> Official Scannable QR & Barcode Pass</li>
+            </ul>
+          </div>
+
+          <a href="pages/register.html?tier=outside" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-black text-xs text-center transition block shadow-lg shadow-purple-600/30">
+            Get Outside Pass (₹100)
+          </a>
+        </div>
+
+        <!-- CARD 3: OFFICIAL PAYTM UPI QR CODE -->
+        <div class="bg-slate-900/90 border border-slate-700/80 rounded-3xl p-6 sm:p-7 flex flex-col justify-between space-y-4 text-center shadow-xl">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center gap-2">
+              <i class="fa-solid fa-qrcode text-sky-400 text-lg"></i>
+              <span class="text-xs font-bold uppercase tracking-wider text-white">Official Paytm UPI QR</span>
+            </div>
+
+            <!-- User's Paytm QR Image with Scanner Line -->
+            <div class="p-2.5 bg-white rounded-2xl shadow-xl max-w-[190px] mx-auto border-2 border-sky-400 relative overflow-hidden qr-scanner-overlay">
+              <img src="assets/upi_qr_rishab.jpg" alt="Official Paytm UPI QR - Rishab Kumar Jha" class="w-full h-auto rounded-xl object-contain select-none" />
+            </div>
+
+            <div class="space-y-1.5 text-xs">
+              <strong class="text-white block font-bold text-sm">Rishab Kumar Jha</strong>
+              <div class="flex items-center justify-center gap-1.5">
+                <code class="text-[11px] font-mono text-cyan-300 bg-slate-950 px-2 py-1 rounded border border-slate-800 font-bold select-all">6287056243@ptsbi</code>
+              </div>
+              <p class="text-[10px] text-slate-400 font-medium">Paytm • PhonePe • Google Pay • BHIM</p>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800/80">
+            <p class="text-[11px] text-emerald-400 font-medium flex items-center justify-center gap-1">
+              <i class="fa-solid fa-shield-check text-xs"></i> 12-digit UTR verified in coordinator desk
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Explanatory note explaining that event registrations have dedicated pages -->
+      <div class="mt-8 bg-slate-900/60 border border-slate-800 rounded-2xl p-4.5 text-center text-xs text-slate-300 max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3 text-left">
+          <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-circle-info text-base"></i>
+          </div>
+          <div>
+            <strong class="text-white block text-xs">How do Event Competitions Work?</strong>
+            <span class="text-[11px] text-slate-400">Buying this Festival Entry Pass gives you official festival admission. You don't choose your competitions here — each event (Coding, Dance, Carrom, etc.) has its own dedicated page where you can register for free!</span>
+          </div>
+        </div>
+        <a href="#events" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-xs whitespace-nowrap transition border border-slate-700">
+          Explore All 10 Events <i class="fa-solid fa-arrow-down ml-1 text-[10px]"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ACTIVITIES SHOWCASE ================= -->
+  <section id="events" class="py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-semibold block mb-1">02 • DEDICATED ACTIVITY PAGES</span>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Competitions & Activities</h2>
+          <p class="text-slate-400 text-sm mt-1">
+            All 10 competitions are <strong class="text-emerald-400">100% FREE</strong> once your one-time entry pass is taken!
+          </p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="w-full md:w-72">
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+            <input id="event-search-input" type="text" placeholder="Search activities..." class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none text-xs font-semibold" id="category-filters">
+        <button class="cat-filter-btn active px-4 py-2 rounded-xl bg-cyan-600 text-white shadow-md shadow-cyan-600/20 whitespace-nowrap" data-filter="all">All Activities (10)</button>
+        <button class="cat-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Technical">Technical</button>
+        <button class="cat-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Cultural">Cultural</button>
+        <button class="cat-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Sports & Gaming">Sports & Gaming</button>
+        <button class="cat-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Literary & Arts">Literary & Arts</button>
+        <button class="cat-filter-btn px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 whitespace-nowrap" data-filter="Creative & Arts">Cosplay & Creative</button>
+      </div>
+
+      <!-- Activity Cards Grid -->
+      <div id="activities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        <!-- Rendered dynamically below -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= SCHEDULE TEASER ================= -->
+  <section class="py-14 bg-slate-950/70 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs uppercase font-mono tracking-widest text-indigo-400 font-semibold block mb-1">05 • COMPLETE EVENT TIMELINE</span>
+        <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Two Days of Non-Stop Thrills</h2>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1">Pre-Events (22 October) & Main Event (23 October), including overlapping events.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Day 1 Card -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">DAY 01</span>
+              <h3 class="text-xl sm:text-2xl font-black text-white">Pre-Events • 22 October</h3>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-bold">12:00 PM Onwards</span>
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm">
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-cyan-400 font-bold shrink-0 pt-0.5 w-28">12:00 PM</span>
+              <div>
+                <strong class="text-white block">Entry & Participant Verification</strong>
+                <span class="text-xs text-slate-400">Campus Auditorium Desk</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-cyan-400 font-bold shrink-0 pt-0.5 w-28">1:00 PM – 2:00 PM</span>
+              <div>
+                <strong class="text-white block">Prompt Engineering (Round 1)</strong>
+                <span class="text-xs text-slate-400">Computer Lab 3</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-cyan-400 font-bold shrink-0 pt-0.5 w-28">2:00 PM – 4:00 PM</span>
+              <div>
+                <strong class="text-white block">Front End Web Sprint</strong>
+                <span class="text-xs text-slate-400">Turing Lab (2-hour live sprint)</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-cyan-400 font-bold shrink-0 pt-0.5 w-28">2:00 PM – 5:00 PM</span>
+              <div>
+                <strong class="text-white block">Carrom Championship</strong>
+                <span class="text-xs text-slate-400">Indoor Sports Arena (Overlapping)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 2 Card -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-xs font-mono text-indigo-400 font-bold uppercase tracking-wider">DAY 02</span>
+              <h3 class="text-xl sm:text-2xl font-black text-white">Main Event • 23 October</h3>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-xs font-bold">9:30 AM Onwards</span>
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm">
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-indigo-400 font-bold shrink-0 pt-0.5 w-28">9:30 AM</span>
+              <div>
+                <strong class="text-white block">Entry & Morning Welcome</strong>
+                <span class="text-xs text-slate-400">Main Gates</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-indigo-400 font-bold shrink-0 pt-0.5 w-28">10:00 – 11:10 AM</span>
+              <div>
+                <strong class="text-white block">Front End Grand Finale</strong>
+                <span class="text-xs text-slate-400">Tech Amphitheatre</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-slate-950/60 border border-slate-800/60">
+              <span class="font-mono text-xs text-indigo-400 font-bold shrink-0 pt-0.5 w-28">12:00 – 3:40 PM</span>
+              <div>
+                <strong class="text-white block">Singing • Poetry • Cosplay • Comedy • Debate • Dance</strong>
+                <span class="text-xs text-slate-400">Main Stage Marathon</span>
+              </div>
+            </div>
+            <div class="flex items-start gap-4 p-3 rounded-xl bg-gradient-to-r from-purple-950/50 to-pink-950/50 border border-purple-500/30">
+              <span class="font-mono text-xs text-pink-400 font-bold shrink-0 pt-0.5 w-28">After Events</span>
+              <div>
+                <strong class="text-pink-300 block">Open DJ Night for Everyone</strong>
+                <span class="text-xs text-slate-300">Mega Concert & Light Show (Free with Entry Pass)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="pages/schedule.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 hover:text-white border border-slate-700 text-xs font-bold transition">
+          <span>Explore Interactive Full Timeline & Venues</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-950 border-t border-slate-800 py-10 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-slate-950 font-bold">⚡</div>
+            <span class="font-black text-white text-base tracking-tight">TECH KRITI 2026</span>
+          </div>
+          <p class="text-slate-400 leading-relaxed">
+            Annual Tech & Cultural Festival. Student-first event platform with one-time entry registration and unlimited competition access.
+          </p>
+        </div>
+
+        <div>
+          <h5 class="font-bold text-white uppercase tracking-wider text-[11px] mb-3">Quick Links</h5>
+          <ul class="space-y-2">
+            <li><a href="#pricing" class="hover:text-cyan-400">Pass Pricing (₹50 / ₹100)</a></li>
+            <li><a href="#events" class="hover:text-cyan-400">Competitions Directory</a></li>
+            <li><a href="pages/schedule.html" class="hover:text-cyan-400">Event Timeline (22-23 Oct)</a></li>
+            <li><a href="pages/student-portal.html" class="hover:text-cyan-400">Student Portal (My Passes)</a></li>
+            <li><a href="pages/admin.html" class="hover:text-cyan-400">Organizer Dashboard</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-bold text-white uppercase tracking-wider text-[11px] mb-3">Dedicated Pages</h5>
+          <ul class="space-y-2">
+            <li><a href="pages/prompt-engineering.html" class="hover:text-cyan-400">Prompt Engineering</a></li>
+            <li><a href="pages/frontend.html" class="hover:text-cyan-400">Front End Web Sprint</a></li>
+            <li><a href="pages/dance.html" class="hover:text-cyan-400">Dance Mania</a></li>
+            <li><a href="pages/singing.html" class="hover:text-cyan-400">Singing Showcase</a></li>
+            <li><a href="pages/carrom.html" class="hover:text-cyan-400">Carrom Championship</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h5 class="font-bold text-white uppercase tracking-wider text-[11px] mb-3">Payment Desk & UPI</h5>
+          <ul class="space-y-2 text-slate-400">
+            <li><i class="fa-solid fa-user-check text-cyan-400 mr-2"></i> Rishab Kumar Jha</li>
+            <li><i class="fa-solid fa-qrcode text-cyan-400 mr-2"></i> 6287056243@ptsbi</li>
+            <li><i class="fa-solid fa-phone text-cyan-400 mr-2"></i> +91 62870 56243</li>
+            <li><i class="fa-solid fa-calendar-check text-cyan-400 mr-2"></i> 22 & 23 October 2026</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px]">
+        <p>© 2026 Tech Kriti Organizing Committee • DSEU</p>
+        <p class="flex items-center gap-2">
+          <span>Paytm UPI Verified</span> • <span>DSEU Pass ₹50</span> • <span>Outside Pass ₹100</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/payment.js"></script>
+  <script src="js/ticket.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Dynamic Render for Activity Cards on Home -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("activities-grid");
+      if (!container || !window.TECH_KRITI_DATA) return;
+
+      const activities = window.TECH_KRITI_DATA.activities;
+
+      function renderCards(filter = "all") {
+        container.innerHTML = "";
+        
+        activities.forEach(act => {
+          if (filter !== "all" && act.category !== filter) return;
+
+          const card = document.createElement("div");
+          card.className = "event-card-item bg-slate-900/90 border border-slate-800 rounded-3xl p-6 glow-card flex flex-col justify-between space-y-4";
+          card.setAttribute("data-title", act.title);
+          card.setAttribute("data-category", act.category);
+
+          const timing = act.schedule && act.schedule.length ? `${act.schedule[0].day} • ${act.schedule[0].time}` : "Oct 22-23";
+
+          card.innerHTML = `
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-slate-800 text-cyan-300 border border-slate-700/80 flex items-center gap-1.5">
+                  <i class="fa-solid ${act.icon || 'fa-star'} text-cyan-400"></i> ${act.category}
+                </span>
+                <span class="text-[11px] font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 flex items-center gap-1">
+                  <i class="fa-solid fa-gift text-[10px]"></i> FREE with Pass
+                </span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-bold text-white">${act.title}</h3>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">${act.description}</p>
+              </div>
+
+              <div class="pt-2 border-t border-slate-800/80 space-y-1.5 text-xs text-slate-300">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-slate-500"><i class="fa-regular fa-clock text-cyan-400 mr-1.5"></i> Slot</span>
+                  <span class="font-medium text-slate-300">${timing}</span>
+                </div>
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-slate-500"><i class="fa-solid fa-users text-indigo-400 mr-1.5"></i> Format</span>
+                  <span class="font-medium text-slate-300">${act.teamType}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
+              <div>
+                <span class="text-[10px] text-slate-500 uppercase tracking-wider block font-mono">Event Fee</span>
+                <span class="text-sm font-black text-emerald-400">FREE with Pass</span>
+              </div>
+
+              <div class="flex items-center gap-1.5">
+                <a href="${act.registrationUrl}" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-md shadow-cyan-600/20 transition flex items-center gap-1">
+                  <span>Register Free</span>
+                  <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </a>
+              </div>
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      }
+
+      renderCards("all");
+
+      const filterBtns = document.querySelectorAll(".cat-filter-btn");
+      filterBtns.forEach(btn => {
+        btn.onclick = () => {
+          filterBtns.forEach(b => {
+            b.classList.remove("active", "bg-cyan-600", "text-white", "shadow-md");
+            b.classList.add("bg-slate-900", "text-slate-400");
+          });
+          btn.classList.add("active", "bg-cyan-600", "text-white", "shadow-md");
+          btn.classList.remove("bg-slate-900", "text-slate-400");
+
+          const filter = btn.getAttribute("data-filter");
+          renderCards(filter);
+        };
+      });
+    });
+  </script>
+</body>
+</html>

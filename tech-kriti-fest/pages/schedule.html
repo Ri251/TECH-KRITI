@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Timeline & Schedule — Tech Kriti 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <i class="fa-solid fa-calendar-days text-slate-950 font-black text-lg"></i>
+        </div>
+        <div>
+          <span class="font-black text-lg text-white">TECH KRITI</span>
+          <span class="block text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-widest">FESTIVAL TIMELINE</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="../index.html#events" class="text-slate-400 hover:text-white transition">All Activities</a>
+        <a href="register.html" class="text-cyan-400 hover:underline">Register</a>
+        <a href="student-portal.html" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">My Passes</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+      <a href="../index.html" class="hover:text-cyan-400">Home</a>
+      <span>/</span>
+      <span class="text-cyan-400 font-medium">Event Timeline</span>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="mb-8">
+      <span class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-bold block mb-1">05 • COMPLETE EVENT TIMELINE BRIEF</span>
+      <h1 class="text-3xl sm:text-4xl font-black text-white">Schedule of Events & Activities</h1>
+      <p class="text-sm text-slate-400 mt-2 max-w-2xl leading-relaxed">
+        Complete timeline of pre-events (22 October) and main-event day (23 October), clearly noting stages, durations, and overlapping competitions.
+      </p>
+    </div>
+
+    <!-- Controls: Day Tabs & Filter -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8 bg-slate-900/80 p-3 rounded-2xl border border-slate-800">
+      
+      <!-- Day Tabs -->
+      <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+        <button id="tab-all-days" class="timeline-day-tab active px-3.5 py-1.5 rounded-lg bg-cyan-600 text-white shadow-md transition" data-day="all">
+          All Days
+        </button>
+        <button id="tab-pre-events" class="timeline-day-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition" data-day="pre">
+          Pre-Events (22 Oct)
+        </button>
+        <button id="tab-main-event" class="timeline-day-tab px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition" data-day="main">
+          Main Event (23 Oct)
+        </button>
+      </div>
+
+      <!-- Quick Action: Calendar download -->
+      <div class="flex items-center gap-2">
+        <button id="btn-export-ical" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-regular fa-calendar-plus text-cyan-400"></i>
+          <span>Save to Calendar</span>
+        </button>
+        <a href="register.html" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold shadow-md shadow-cyan-600/30 transition">
+          Register Pass
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ================= DAY 1: PRE-EVENTS (22 OCTOBER) ================= -->
+    <section id="section-pre-events" class="mb-12 timeline-section">
+      <div class="flex items-center justify-between border-b border-cyan-500/30 pb-3 mb-6">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
+          <h2 class="text-xl sm:text-2xl font-black text-white">PRE-EVENTS • 22 OCTOBER</h2>
+        </div>
+        <span class="text-xs font-mono text-cyan-300 font-semibold px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/20">
+          Campus Auditorium & Labs
+        </span>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- Slot 1 -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-door-open"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-cyan-400">12:00 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300">General</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Entry & Registration Desk Check-In</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Gates open. Collect physical badges, QR ticket pass verification, and welcome kit.</p>
+            </div>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="text-xs text-slate-400 block"><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> Main Gate & SAC</span>
+          </div>
+        </div>
+
+        <!-- Slot 2: Prompt Engineering -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-cyan-400">1:00 PM – 2:00 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/20">Technical</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Prompt Engineering (Round 1: Rapid Prompting)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Solve 5 prompt optimization and logical reasoning challenges on frontier LLMs.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-xs text-slate-400 hidden sm:inline"><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> Computer Lab 3</span>
+            <a href="prompt-engineering.html" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-md shadow-cyan-600/30 transition">
+              Join Event (Free with Pass)
+            </a>
+          </div>
+        </div>
+
+        <!-- Slot 3: Front End (Overlapping with Carrom) -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-blue-400">2:00 PM – 4:00 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-500/20">Technical</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">⚡ Overlapping</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Front End Web Sprint (Round 1 UI Elimination)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Rapid 2-hour build: Design and deploy a high-fidelity responsive interface.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-xs text-slate-400 hidden sm:inline"><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> Turing Lab 2nd Floor</span>
+            <a href="frontend.html" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/30 transition">
+              Join Event (Free with Pass)
+            </a>
+          </div>
+        </div>
+
+        <!-- Slot 4: Carrom (Overlapping with Front End) -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-circle-dot"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-amber-400">2:00 PM – 5:00 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/20">Sports</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">⚡ Overlapping</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Carrom Championship (Knockout & Quarterfinals)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Singles and doubles knockout matches on professional tournament boards.</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-xs text-slate-400 hidden sm:inline"><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> Indoor Sports Arena</span>
+            <a href="carrom.html" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs shadow-md shadow-amber-600/30 transition">
+              Join Event (Free with Pass)
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= DAY 2: MAIN EVENT (23 OCTOBER) ================= -->
+    <section id="section-main-event" class="mb-12 timeline-section">
+      <div class="flex items-center justify-between border-b border-indigo-500/30 pb-3 mb-6">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-indigo-400 animate-pulse"></span>
+          <h2 class="text-xl sm:text-2xl font-black text-white">MAIN EVENT • 23 OCTOBER</h2>
+        </div>
+        <span class="text-xs font-mono text-indigo-300 font-semibold px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-500/20">
+          Grand Auditorium & Main Grounds
+        </span>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- Slot: Entry -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-door-open"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-indigo-400">9:30 AM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-800 text-slate-300">General</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Entry & Morning Welcome</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Festival main gate opens, morning welcoming ceremony, refreshments & orientation.</p>
+            </div>
+          </div>
+          <span class="text-xs text-slate-400"><i class="fa-solid fa-location-dot text-rose-400 mr-1"></i> Main Gates</span>
+        </div>
+
+        <!-- Slot: Front End Finale -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-blue-400">10:00 AM – 11:10 AM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-500/20">Technical</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Front End (Grand Finale & Pitch)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Top finalists present their web prototypes live before jury on stage.</p>
+            </div>
+          </div>
+          <a href="frontend.html" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Memory Challenge (Overlapping) -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-purple-400">11:00 AM – 12:15 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-500/20">Mind Hack</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">⚡ Overlapping</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Memory Challenge</h3>
+              <p class="text-xs text-slate-400 mt-0.5">High-intensity recall rounds: digits, names, matrices and sudden-death speed duels.</p>
+            </div>
+          </div>
+          <a href="memory-challenge.html" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Prompt Engineering Finale -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-cyan-400">11:10 AM – 11:40 AM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/20">Technical</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Prompt Engineering (Grand Finale)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Jailbreak optimization and token duel on the main auditorium stage projector.</p>
+            </div>
+          </div>
+          <a href="prompt-engineering.html" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Singing -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-microphone"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-rose-400">12:00 PM – 12:30 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-rose-950/60 text-rose-300 border border-rose-500/20">Cultural</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Singing Showcase (Voice of Kriti)</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Acoustic, semi-classical, western and pop live performances on stage.</p>
+            </div>
+          </div>
+          <a href="singing.html" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Poetry -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-feather"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-emerald-400">12:30 PM – 1:00 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-500/20">Literary</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Poetry & Slam Verse</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Spoken word, Urdu shayari, Hindi kavita, and English slam recitations.</p>
+            </div>
+          </div>
+          <a href="poetry.html" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Cosplay -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-violet-500/10 border border-violet-500/20 text-violet-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-masks-theater"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-violet-400">1:00 PM – 1:30 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-violet-950/60 text-violet-300 border border-violet-500/20">Creative</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Cosplay Extravaganza</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Anime, gaming, comic character ramp walk and monologue showcase.</p>
+            </div>
+          </div>
+          <a href="cosplay.html" class="px-4 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Stand-up Comedy -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-face-laugh-beam"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-yellow-400">1:30 PM – 2:10 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-yellow-950/60 text-yellow-300 border border-yellow-500/20">Cultural</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Stand-up Comedy Open Mic</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Observational comedy sets, college relatable punchlines, and comic timing.</p>
+            </div>
+          </div>
+          <a href="standup.html" class="px-4 py-2 rounded-xl bg-yellow-600 hover:bg-yellow-500 text-slate-950 font-black text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Tech Debate -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-sky-400">2:10 PM – 2:30 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-sky-950/60 text-sky-300 border border-sky-500/20">Technical Debate</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Tech Debate: The Clash of Minds</h3>
+              <p class="text-xs text-slate-400 mt-0.5">AI Ethics, surveillance, Big Tech vs open ecosystem championship clash.</p>
+            </div>
+          </div>
+          <a href="tech-debate.html" class="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Dance -->
+        <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-fuchsia-500/10 border border-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center font-black text-xl shrink-0">
+              <i class="fa-solid fa-person-running"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-fuchsia-400">2:30 PM – 3:40 PM</span>
+                <span class="text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-fuchsia-950/60 text-fuchsia-300 border border-fuchsia-500/20">Cultural</span>
+              </div>
+              <h3 class="text-lg font-bold text-white mt-1">Dance Mania: Rhythm Revolution</h3>
+              <p class="text-xs text-slate-400 mt-0.5">High-energy solo, duo, and crew dance choreography championship.</p>
+            </div>
+          </div>
+          <a href="dance.html" class="px-4 py-2 rounded-xl bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold text-xs shadow-md transition">Join Event (Free with Pass)</a>
+        </div>
+
+        <!-- Slot: Open DJ for Everyone -->
+        <div class="bg-gradient-to-r from-purple-950/60 via-pink-950/50 to-slate-900 border border-purple-500/40 rounded-2xl p-6 glow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-pink-500/20 border border-pink-500/30 text-pink-300 flex items-center justify-center font-black text-2xl shrink-0 animate-pulse">
+              <i class="fa-solid fa-compact-disc"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono text-xs font-black text-pink-400">After Main Events (3:40 PM Onwards)</span>
+                <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-pink-500/20 text-pink-200 border border-pink-500/40">FESTIVAL AFTERPARTY</span>
+              </div>
+              <h3 class="text-xl font-black text-white mt-1">Open DJ for Everyone</h3>
+              <p class="text-xs text-slate-300 mt-0.5">Laser concert, top campus DJ artists, bass drops, and open celebration for all attendees!</p>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <span class="px-4 py-2 rounded-xl bg-pink-600/30 border border-pink-400/40 text-pink-200 text-xs font-bold block text-center">
+              Free with any Pass
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>© 2026 Tech Kriti Organizing Committee • Program Schedule</p>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dayTabs = document.querySelectorAll(".timeline-day-tab");
+      const secPre = document.getElementById("section-pre-events");
+      const secMain = document.getElementById("section-main-event");
+
+      dayTabs.forEach(tab => {
+        tab.onclick = () => {
+          dayTabs.forEach(t => {
+            t.classList.remove("active", "bg-cyan-600", "text-white");
+            t.classList.add("text-slate-400");
+          });
+          tab.classList.add("active", "bg-cyan-600", "text-white");
+          tab.classList.remove("text-slate-400");
+
+          const day = tab.getAttribute("data-day");
+          if (day === "all") {
+            secPre.style.display = "";
+            secMain.style.display = "";
+          } else if (day === "pre") {
+            secPre.style.display = "";
+            secMain.style.display = "none";
+          } else if (day === "main") {
+            secPre.style.display = "none";
+            secMain.style.display = "";
+          }
+        };
+      });
+
+      // Export ICS file for student calendar
+      const calBtn = document.getElementById("btn-export-ical");
+      if (calBtn) {
+        calBtn.onclick = () => {
+          const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Tech Kriti 2026//College Festival//EN
+BEGIN:VEVENT
+SUMMARY:Tech Kriti 2026 - Pre-Events
+DESCRIPTION:Prompt Engineering, Front End Web Sprint, and Carrom Championship
+DTSTART:20261022T063000Z
+DTEND:20261022T113000Z
+LOCATION:Main Auditorium & Tech Block
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Tech Kriti 2026 - Main Festival & Open DJ
+DESCRIPTION:Competitions, Finals, Cultural Stage, and Open DJ Night
+DTSTART:20261023T040000Z
+DTEND:20261023T140000Z
+LOCATION:Main Auditorium Stage & Campus Grounds
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+          const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "TechKriti2026_Schedule.ics";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          App.toast("Tech Kriti schedule added to calendar!", "success");
+        };
+      }
+    });
+  </script>
+</body>
+</html>

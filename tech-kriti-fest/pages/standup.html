@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stand-up Comedy Open Mic Registration — Tech Kriti 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-yellow-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center shadow-lg shadow-yellow-500/20">
+          <i class="fa-solid fa-face-laugh-beam text-slate-950 text-lg"></i>
+        </div>
+        <div>
+          <span class="font-black text-lg text-white">TECH KRITI</span>
+          <span class="block text-[9px] font-mono text-yellow-400 font-bold uppercase tracking-widest">COMEDY OPEN MIC</span>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4 text-xs font-semibold">
+        <a href="../index.html#events" class="text-slate-400 hover:text-white transition">All Activities</a>
+        <a href="schedule.html" class="text-slate-400 hover:text-white transition hidden sm:inline">Timeline</a>
+        <a href="student-portal.html" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">My Passes</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <div class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+      <a href="../index.html" class="hover:text-yellow-400">Home</a>
+      <span>/</span>
+      <a href="../index.html#events" class="hover:text-yellow-400">Activities</a>
+      <span>/</span>
+      <span class="text-yellow-400 font-medium">Stand-up Comedy Registration</span>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="relative rounded-3xl bg-gradient-to-r from-yellow-950/60 via-amber-950/40 to-slate-900 border border-yellow-500/30 p-6 sm:p-8 overflow-hidden mb-8 shadow-xl">
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">CULTURAL & FUN</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">COMEDY: FREE</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300">23 OCTOBER • 1:30 PM</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-black text-white">Stand-up Comedy Open Mic</h1>
+          <p class="text-sm text-slate-300 mt-2 max-w-xl">
+            Observational humor, college punchlines, and laughs! Free participation with the One-Time Festival Entry Pass (₹50 for DSEU / ₹100 for Outside Colleges).
+          </p>
+        </div>
+
+        <div class="bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shrink-0 text-center md:text-right">
+          <span class="text-xs text-slate-400 uppercase tracking-wider block">Entry Fee</span>
+          <span class="text-3xl font-black text-emerald-400">FREE</span>
+          <span class="text-[11px] text-amber-400 block font-semibold mt-0.5"><i class="fa-solid fa-award mr-1"></i> Trophy & Merit Certificates</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left Column -->
+      <div class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <h3 class="font-bold text-white text-sm flex items-center gap-2">
+            <i class="fa-regular fa-clock text-yellow-400"></i> Stage & Schedule
+          </h3>
+          <div class="text-xs space-y-2 text-slate-300">
+            <p><strong class="text-white">Day:</strong> Main Event • 23 October 2026</p>
+            <p><strong class="text-white">Time:</strong> 1:30 PM – 2:10 PM</p>
+            <p><strong class="text-white">Venue:</strong> Main Auditorium Stage</p>
+            <p><strong class="text-white">Mic Duration:</strong> 4 Minutes</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <h3 class="font-bold text-white text-sm flex items-center gap-2">
+            <i class="fa-solid fa-circle-exclamation text-yellow-400"></i> Comedy Rules
+          </h3>
+          <ul class="text-xs text-slate-400 space-y-2 list-disc pl-4">
+            <li>Original sets preferred.</li>
+            <li>No derogatory hate speech or personal harassment.</li>
+            <li>Laughter quotient and delivery determine winners.</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-2.5">
+          <h3 class="font-bold text-white text-sm flex items-center gap-2">
+            <i class="fa-solid fa-location-dot text-yellow-400"></i> Stage & Mic Desk
+          </h3>
+          <p class="text-xs text-slate-300 font-medium">Main Auditorium Stage</p>
+          <p class="text-xs text-slate-400">Report at backstage coordination desk 20 minutes before slot time with your digital festival entry pass.</p>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="lg:col-span-2">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
+          
+          <div class="border-b border-slate-800 pb-4">
+            <span class="text-xs uppercase font-mono tracking-wider text-yellow-400 font-bold block">01 • DEDICATED ACTIVITY REGISTRATION</span>
+            <h2 class="text-2xl font-black text-white mt-1">Comedian Details</h2>
+            <p class="text-xs text-slate-400 mt-1">Free with your One-Time Entry Pass. Pay once via UPI QR and participate in all events.</p>
+          </div>
+
+          <form id="standup-reg-form" class="space-y-5">
+            
+            <div class="space-y-2">
+              <label class="block text-xs font-semibold text-slate-300">Select Pass Status <span class="text-rose-400">*</span></label>
+              <select name="tierSelect" id="standup-tier-select" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-yellow-500">
+                <option value="dseu" selected>DSEU Campus Student — One-time Entry Fee ₹50 (Pay via UPI QR)</option>
+                <option value="outside">Outside / Non-DSEU Student — One-time Entry Fee ₹100 (Pay via UPI QR)</option>
+                <option value="already_paid">Already Paid Festival Entry Fee — ₹0 (Free Registration)</option>
+              </select>
+            </div>
+
+            <div class="space-y-4 pt-2">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name <span class="text-rose-400">*</span></label>
+                  <input type="text" name="name" required placeholder="e.g. Yash Vardhan" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-yellow-500" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">College Roll Number <span class="text-rose-400">*</span></label>
+                  <input type="text" name="rollNumber" required placeholder="e.g. 23BCA055" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 font-mono uppercase focus:outline-none focus:border-yellow-500" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">College Email <span class="text-rose-400">*</span></label>
+                  <input type="email" name="email" required placeholder="yash@college.edu" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-yellow-500" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Phone Number <span class="text-rose-400">*</span></label>
+                  <input type="tel" name="phone" required placeholder="+91 97765 22110" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 font-mono focus:outline-none focus:border-yellow-500" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Semester <span class="text-rose-400">*</span></label>
+                  <select name="semester" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-yellow-500">
+                    <option value="Semester 1">Semester 1</option>
+                    <option value="Semester 2">Semester 2</option>
+                    <option value="Semester 3">Semester 3</option>
+                    <option value="Semester 4" selected>Semester 4</option>
+                    <option value="Semester 5">Semester 5</option>
+                    <option value="Semester 6">Semester 6</option>
+                    <option value="Semester 7">Semester 7</option>
+                    <option value="Semester 8">Semester 8</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Section <span class="text-rose-400">*</span></label>
+                  <input type="text" name="section" required placeholder="e.g. B" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 uppercase focus:outline-none focus:border-yellow-500" value="B" />
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Campus <span class="text-rose-400">*</span></label>
+                  <select name="campus" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-yellow-500">
+                    <option value="DSEU Okhla-I Campus (Main)" selected>DSEU Okhla-I Campus</option>
+                    <option value="DSEU Okhla-II Campus">DSEU Okhla-II Campus</option>
+                    <option value="DSEU Dwarka Campus">DSEU Dwarka Campus</option>
+                    <option value="DSEU Shakarpur Campus">DSEU Shakarpur Campus</option>
+                    <option value="DSEU Pusa Campus">DSEU Pusa Campus</option>
+                    <option value="Outside College / Non-DSEU Student">Outside College Student</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comedy Routine Details -->
+            <div class="space-y-4 pt-4 border-t border-slate-800">
+              <span class="text-xs uppercase tracking-wider text-yellow-400 font-bold block flex items-center gap-1.5">
+                <i class="fa-solid fa-microphone-lines"></i> Comedy Routine Profile
+              </span>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Comedy Style <span class="text-rose-400">*</span></label>
+                  <select name="comedyStyle" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-yellow-500">
+                    <option value="Observational Comedy" selected>College & Hostel Life</option>
+                    <option value="Storytelling">Storytelling & Anecdotes</option>
+                    <option value="Improv & One-liners">Improv & Quick Wit</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Set Working Title <span class="text-rose-400">*</span></label>
+                  <input type="text" name="setTitle" required placeholder="e.g. Engineering Life in 4 Minutes" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-yellow-500" value="Surviving Viva Voce" />
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="text-xs text-slate-400">
+                <span>Fee: <strong id="standup-fee-display" class="text-emerald-400 text-base">₹50 (DSEU Pass)</strong></span> • 
+                <span class="text-sky-300">Pay via Paytm UPI QR</span>
+              </div>
+
+              <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-yellow-600 via-amber-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-slate-950 font-black text-sm shadow-xl shadow-yellow-600/30 transition transform active:scale-95 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-qrcode text-xs"></i>
+                <span id="standup-btn-text">Proceed to UPI QR & Get Pass</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>© 2026 Tech Kriti Organizing Committee • Comedy Society</p>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/payment.js"></script>
+  <script src="../js/ticket.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    const tierSelect = document.getElementById("standup-tier-select");
+    const feeDisplay = document.getElementById("standup-fee-display");
+    const btnText = document.getElementById("standup-btn-text");
+
+    tierSelect.onchange = () => {
+      const val = tierSelect.value;
+      if (val === "dseu") {
+        feeDisplay.textContent = "₹50 (DSEU Pass)";
+        btnText.textContent = "Pay ₹50 via UPI QR & Get Pass";
+      } else if (val === "outside") {
+        feeDisplay.textContent = "₹100 (Outside Pass)";
+        btnText.textContent = "Pay ₹100 via UPI QR & Get Pass";
+      } else {
+        feeDisplay.textContent = "₹0 (Pass Holder Free)";
+        btnText.textContent = "Register Free for Stand-up";
+      }
+    };
+
+    document.getElementById("standup-reg-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+
+      const studentData = {
+        name: formData.get("name"),
+        rollNumber: formData.get("rollNumber"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        semester: formData.get("semester"),
+        section: formData.get("section"),
+        campus: formData.get("campus")
+      };
+
+      const customData = {
+        comedyStyle: formData.get("comedyStyle"),
+        setTitle: formData.get("setTitle")
+      };
+
+      const tier = formData.get("tierSelect");
+      const amount = tier === "dseu" ? 50 : (tier === "outside" ? 100 : 0);
+
+      try {
+        const paymentResult = await PaymentEngine.startPayment({
+          title: "Stand-up Comedy Open Mic",
+          activityId: "standup",
+          category: "Cultural & Fun",
+          studentCategory: tier,
+          amount: amount,
+          student: studentData,
+          customData: customData
+        });
+
+        if (paymentResult && paymentResult.success) {
+          const regRecord = StorageManager.saveRegistration({
+            student: studentData,
+            activityId: "standup",
+            activityTitle: "Stand-up Comedy Open Mic",
+            category: "Cultural & Fun",
+            amountPaid: paymentResult.amountPaid,
+            utrNumber: paymentResult.utrNumber || "FREE_PASS_HOLDER",
+            paymentMethod: paymentResult.paymentMethod,
+            paymentStatus: "Completed",
+            paymentVerification: paymentResult.paymentVerification || "Pending Verification",
+            transactionId: paymentResult.transactionId,
+            customData: customData
+          });
+
+          window.location.href = `ticket.html?id=${encodeURIComponent(regRecord.id)}`;
+        }
+      } catch (err) {
+        console.log("Payment canceled", err);
+      }
+    });
+  </script>
+</body>
+</html>

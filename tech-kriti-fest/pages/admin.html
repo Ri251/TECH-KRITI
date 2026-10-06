@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coordinator & Admin Portal — Tech Kriti 2026</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col selection:bg-cyan-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../index.html" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+            <i class="fa-solid fa-shield-halved text-white text-lg"></i>
+          </div>
+          <div>
+            <span class="font-black text-lg text-white">TECH KRITI</span>
+            <span class="block text-[9px] font-mono text-cyan-400 font-bold uppercase tracking-widest">ORGANIZER & UPI ADMIN</span>
+          </div>
+        </a>
+      </div>
+
+      <div id="admin-nav-actions" class="hidden flex items-center gap-2 sm:gap-3 text-xs font-semibold">
+        <button id="btn-gate-scanner" class="px-3.5 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold transition flex items-center gap-1.5 shadow-md shadow-cyan-600/30">
+          <i class="fa-solid fa-qrcode"></i>
+          <span class="hidden sm:inline">Gate Scanner</span>
+        </button>
+        <button id="btn-export-csv" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-file-csv text-emerald-400"></i>
+          <span class="hidden sm:inline">CSV</span>
+        </button>
+        <button id="btn-change-pass" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-1.5" title="Change Admin Password">
+          <i class="fa-solid fa-key text-cyan-400"></i>
+          <span class="hidden md:inline">Change Pass</span>
+        </button>
+        <button id="btn-admin-logout" class="px-3.5 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white border border-rose-500/30 transition flex items-center gap-1.5 shadow-md shadow-rose-500/10" title="Lock Admin Portal">
+          <i class="fa-solid fa-lock text-xs"></i>
+          <span>Lock</span>
+        </button>
+        <a href="../index.html" class="text-slate-400 hover:text-white p-1.5 ml-1" title="Back to Website">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ADMIN GATEKEEPER LOCK SCREEN ================= -->
+  <div id="admin-lock-screen" class="fixed inset-0 z-50 bg-[#040711] flex items-center justify-center p-4 cyber-grid backdrop-blur-2xl">
+    <div id="admin-login-card" class="w-full max-w-md bg-slate-900/95 border border-cyan-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-500/10 space-y-6 relative overflow-hidden backdrop-blur-xl">
+      <!-- Cyber Top Gradient Bar -->
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500"></div>
+
+      <!-- Security Icon & Header -->
+      <div class="text-center space-y-2 pt-2">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/20 border border-cyan-400/30 flex items-center justify-center mx-auto shadow-lg shadow-cyan-500/20 mb-3">
+          <i class="fa-solid fa-shield-halved text-cyan-400 text-2xl"></i>
+        </div>
+        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 uppercase tracking-widest inline-block">
+          RESTRICTED GATEWAY
+        </span>
+        <h2 class="text-2xl font-black text-white font-display">Organizer Portal Locked</h2>
+        <p class="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
+          Access is strictly restricted to Tech Kriti 2026 organizers. Enter your administrative credentials to unlock the desk.
+        </p>
+      </div>
+
+      <!-- Error Notification Box -->
+      <div id="login-error-alert" class="hidden p-3 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2.5">
+        <i class="fa-solid fa-circle-exclamation text-rose-400 text-sm shrink-0"></i>
+        <span id="login-error-text">Invalid Admin ID or Password.</span>
+      </div>
+
+      <!-- Login Form -->
+      <form id="form-admin-login" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Admin ID / Username</label>
+          <div class="relative">
+            <i class="fa-solid fa-user-shield absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
+            <input type="text" id="login-admin-id" required autocomplete="username" placeholder="Enter admin ID" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1.5">Portal Password</label>
+          <div class="relative">
+            <i class="fa-solid fa-key absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
+            <input type="password" id="login-admin-pass" required autocomplete="current-password" placeholder="••••••••••••" class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-10 py-2.5 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition" />
+            <button type="button" id="btn-toggle-pass" class="absolute right-3 top-3 text-slate-500 hover:text-slate-300 text-xs" tabindex="-1">
+              <i class="fa-solid fa-eye" id="pass-eye-icon"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs pt-0.5">
+          <label class="flex items-center gap-2 text-slate-400 cursor-pointer">
+            <input type="checkbox" id="login-remember-me" class="rounded bg-slate-950 border-slate-700 text-cyan-500 focus:ring-0" />
+            <span>Remember on this device</span>
+          </label>
+          <a href="../index.html" class="text-slate-500 hover:text-cyan-400 transition text-[11px]">Back to Fest</a>
+        </div>
+
+        <button type="submit" id="btn-submit-unlock" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-blue-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-black text-xs uppercase tracking-wider transition shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+          <i class="fa-solid fa-lock-open text-xs"></i>
+          <span>Unlock Admin Desk</span>
+        </button>
+      </form>
+
+      <!-- Fest Committee Credentials Box -->
+      <div class="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-[11px] space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="text-slate-400 font-semibold flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-cyan-400"></i> Authorized Committee Login:
+          </span>
+          <span class="text-emerald-400 font-mono text-[9px] uppercase font-bold">ACTIVE LOCK</span>
+        </div>
+        <p class="font-mono text-slate-300">
+          Default ID: <strong class="text-cyan-400"></strong> &nbsp;|&nbsp; Password: <strong class="text-cyan-400"></strong>
+        </p>
+        <p class="text-[10px] text-slate-500">
+          (Organizers can change this password anytime using the "Change Pass" button inside)
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL: CHANGE ADMIN PASSWORD -->
+  <div id="modal-change-pass" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-slate-900 border border-slate-700 rounded-3xl p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white text-base flex items-center gap-2">
+          <i class="fa-solid fa-key text-cyan-400"></i> Update Admin Credentials
+        </h3>
+        <button id="btn-close-change-pass" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="change-pass-error" class="hidden p-3 rounded-xl bg-rose-500/15 border border-rose-500/40 text-rose-300 text-xs flex items-center gap-2">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="change-pass-error-text"></span>
+      </div>
+
+      <form id="form-change-pass" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Current Password</label>
+          <input type="password" id="input-current-pass" required placeholder="Enter current password" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">New Admin ID</label>
+          <input type="text" id="input-new-id" required placeholder="e.g. admin or lead_coord" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">New Password</label>
+          <input type="password" id="input-new-pass" required placeholder="Min 6 characters" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Confirm New Password</label>
+          <input type="password" id="input-confirm-pass" required placeholder="Confirm new password" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-cyan-500" />
+        </div>
+
+        <div class="pt-2 flex items-center gap-3">
+          <button type="button" id="btn-cancel-change-pass" class="w-1/2 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition">
+            Cancel
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition shadow-md shadow-cyan-600/30">
+            Save New Pass
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER (PROTECTED) -->
+  <main id="admin-main-wrapper" class="hidden flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-8">
+    
+    <!-- Top Heading -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 uppercase tracking-wider">
+            ADMIN & REGISTRATION DESK
+          </span>
+          <span class="text-xs text-slate-500">•</span>
+          <span class="text-xs text-emerald-400 font-medium flex items-center gap-1">
+            <i class="fa-solid fa-circle text-[7px] animate-pulse"></i> Live Database Ready
+          </span>
+        </div>
+        <h1 class="text-3xl font-black text-white">Festival Registrations & UPI Verification</h1>
+        <p class="text-xs text-slate-400 mt-1">Verify 12-digit UPI UTR numbers against Rishab Kumar Jha's Paytm statement, manage gate check-ins, and export participant records.</p>
+      </div>
+
+      <div class="flex items-center gap-2 flex-wrap">
+        <button id="btn-add-walkin" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Add Spot Walk-in</span>
+        </button>
+        <button id="btn-clear-db" class="px-3 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-bold transition flex items-center gap-1.5" title="Clear All Records">
+          <i class="fa-solid fa-trash-can"></i>
+          <span class="hidden sm:inline">Reset DB</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- METRICS CARDS -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3.5">
+      
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold block">Total Registered</span>
+        <div class="flex items-baseline gap-2">
+          <span id="metric-total-reg" class="text-2xl lg:text-3xl font-black text-white font-mono">0</span>
+          <span class="text-[10px] text-cyan-400 font-medium">Students</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold block">DSEU Campus (₹50)</span>
+        <div class="flex items-baseline gap-2">
+          <span id="metric-dseu-reg" class="text-2xl lg:text-3xl font-black text-cyan-400 font-mono">0</span>
+          <span class="text-[10px] text-slate-400">Passes</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold block">Outside (₹100)</span>
+        <div class="flex items-baseline gap-2">
+          <span id="metric-outside-reg" class="text-2xl lg:text-3xl font-black text-amber-400 font-mono">0</span>
+          <span class="text-[10px] text-slate-400">Passes</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1">
+        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold block">UPI Revenue</span>
+        <div class="flex items-baseline gap-2">
+          <span id="metric-total-rev" class="text-2xl lg:text-3xl font-black text-emerald-400 font-mono">₹0</span>
+          <span class="text-[10px] text-slate-400 font-mono">INR</span>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-1 col-span-2 lg:col-span-1">
+        <span class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold block">Gate Admitted</span>
+        <div class="flex items-baseline gap-2">
+          <span id="metric-total-checked" class="text-2xl lg:text-3xl font-black text-indigo-400 font-mono">0</span>
+          <span id="metric-checkin-pct" class="text-[10px] text-slate-400 font-mono">(0%)</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SEARCH & FILTER TOOLBAR -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+      
+      <!-- Search Input -->
+      <div class="relative flex-1">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+        <input id="admin-search-input" type="text" placeholder="Search by Student Name, Roll No, Phone, UTR No, or Ticket ID..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 transition" />
+      </div>
+
+      <!-- Filters -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <div>
+          <select id="admin-filter-tier" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+            <option value="all">All Student Tiers</option>
+            <option value="dseu">DSEU Campus (₹50)</option>
+            <option value="outside">Outside College (₹100)</option>
+          </select>
+        </div>
+
+        <div>
+          <select id="admin-filter-verification" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+            <option value="all">All UPI Verification</option>
+            <option value="verified">Verified Only ✅</option>
+            <option value="pending">Pending UTR Check ⏳</option>
+          </select>
+        </div>
+
+        <div>
+          <select id="admin-filter-activity" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+            <option value="all">All Activities</option>
+            <option value="general">Festival Entry Pass</option>
+            <option value="prompt-engineering">Prompt Engineering</option>
+            <option value="frontend">Front End Web Sprint</option>
+            <option value="carrom">Carrom Championship</option>
+            <option value="memory-challenge">Memory Challenge</option>
+            <option value="singing">Singing Showcase</option>
+            <option value="poetry">Poetry & Slam</option>
+            <option value="cosplay">Cosplay Extravaganza</option>
+            <option value="standup">Stand-up Comedy</option>
+            <option value="tech-debate">Tech Debate</option>
+            <option value="dance">Dance Mania</option>
+          </select>
+        </div>
+
+        <div>
+          <select id="admin-filter-checkin" class="bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500">
+            <option value="all">All Gate Status</option>
+            <option value="admitted">Admitted / Checked In</option>
+            <option value="pending">Pending Check-in</option>
+          </select>
+        </div>
+
+        <button id="btn-reset-filters" class="px-2.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white text-xs transition" title="Reset Filters">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- REGISTRATION DATABASE TABLE -->
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-slate-300">
+          <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider text-[10px] font-mono border-b border-slate-800">
+            <tr>
+              <th class="px-4 py-3.5">Ticket ID & Time</th>
+              <th class="px-4 py-3.5">Participant</th>
+              <th class="px-4 py-3.5">College & Tier</th>
+              <th class="px-4 py-3.5">Event Selection</th>
+              <th class="px-4 py-3.5">UPI Details & UTR</th>
+              <th class="px-4 py-3.5 text-center">Payment Verification</th>
+              <th class="px-4 py-3.5 text-center">Gate Check-in</th>
+              <th class="px-4 py-3.5 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body" class="divide-y divide-slate-800/80">
+            <!-- Injected by script -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty state -->
+      <div id="admin-empty-state" class="hidden text-center py-16 px-4 space-y-4">
+        <div class="w-16 h-16 rounded-2xl bg-slate-800/60 border border-slate-700 text-slate-500 flex items-center justify-center text-3xl mx-auto">
+          <i class="fa-solid fa-inbox"></i>
+        </div>
+        <div class="space-y-1">
+          <h4 class="text-base font-bold text-white">No registrations found</h4>
+          <p class="text-xs text-slate-400 max-w-md mx-auto">
+            The registration database is ready and open! When students register on the website and submit their 12-digit UPI UTR number, their passes will appear here for you to verify.
+          </p>
+        </div>
+        <div class="flex items-center justify-center gap-3 pt-2">
+          <a href="register.html" target="_blank" class="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition flex items-center gap-2">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Registration Form
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL: GATE TICKET QR SCANNER / VALIDATOR -->
+  <div id="modal-scanner" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="w-full max-w-md bg-slate-900 border border-slate-700 rounded-3xl p-6 shadow-2xl space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-bold text-white text-base flex items-center gap-2">
+          <i class="fa-solid fa-qrcode text-cyan-400"></i> Festival Gate Pass Validator
+        </h3>
+        <button id="btn-close-scanner" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <p class="text-xs text-slate-400">Type or paste Ticket ID, Student Roll Number, or scan QR payload:</p>
+        <div class="flex items-center gap-2">
+          <input id="scanner-query-input" type="text" placeholder="e.g. TK-PASS-8841 or 23BCS104" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs text-slate-100 font-mono uppercase focus:outline-none focus:border-cyan-500" />
+          <button id="btn-run-verify" class="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shrink-0">
+            Verify Pass
+          </button>
+        </div>
+      </div>
+
+      <div id="scanner-result-box" class="p-4 rounded-2xl bg-slate-950 border border-slate-800 hidden space-y-3">
+        <!-- Rendered on verification -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <p>© 2026 Tech Kriti Organizing Committee • DSEU Fest Admin Panel</p>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/storage.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // -------------------------------------------------------------
+      // 🔒 AUTHENTICATION & PORTAL LOCK CONTROLLER
+      // -------------------------------------------------------------
+      const lockScreen = document.getElementById("admin-lock-screen");
+      const loginCard = document.getElementById("admin-login-card");
+      const loginForm = document.getElementById("form-admin-login");
+      const loginIdInput = document.getElementById("login-admin-id");
+      const loginPassInput = document.getElementById("login-admin-pass");
+      const rememberMeInput = document.getElementById("login-remember-me");
+      const loginErrorAlert = document.getElementById("login-error-alert");
+      const loginErrorText = document.getElementById("login-error-text");
+      const btnTogglePass = document.getElementById("btn-toggle-pass");
+      const passEyeIcon = document.getElementById("pass-eye-icon");
+
+      const adminMainWrapper = document.getElementById("admin-main-wrapper");
+      const adminNavActions = document.getElementById("admin-nav-actions");
+      const btnAdminLogout = document.getElementById("btn-admin-logout");
+
+      const modalChangePass = document.getElementById("modal-change-pass");
+      const btnChangePass = document.getElementById("btn-change-pass");
+      const btnCloseChangePass = document.getElementById("btn-close-change-pass");
+      const btnCancelChangePass = document.getElementById("btn-cancel-change-pass");
+      const formChangePass = document.getElementById("form-change-pass");
+      const changePassError = document.getElementById("change-pass-error");
+      const changePassErrorText = document.getElementById("change-pass-error-text");
+
+      function getCredentials() {
+        try {
+          const saved = localStorage.getItem("tk_admin_credentials");
+          if (saved) return JSON.parse(saved);
+        } catch (e) {}
+        return { username: "admin", password: "techkriti2026" };
+      }
+
+      function isUserAuthenticated() {
+        return sessionStorage.getItem("tk_admin_authenticated") === "true" ||
+               localStorage.getItem("tk_admin_authenticated") === "true";
+      }
+
+      function unlockPortal() {
+        lockScreen.classList.add("hidden");
+        lockScreen.style.display = "none";
+        adminMainWrapper.classList.remove("hidden");
+        adminMainWrapper.style.display = "block";
+        adminNavActions.classList.remove("hidden");
+        adminNavActions.style.display = "flex";
+        updateDashboard();
+      }
+
+      function lockPortal() {
+        sessionStorage.removeItem("tk_admin_authenticated");
+        localStorage.removeItem("tk_admin_authenticated");
+        adminMainWrapper.classList.add("hidden");
+        adminMainWrapper.style.display = "none";
+        adminNavActions.classList.add("hidden");
+        adminNavActions.style.display = "none";
+        lockScreen.classList.remove("hidden");
+        lockScreen.style.display = "flex";
+        loginPassInput.value = "";
+        loginErrorAlert.classList.add("hidden");
+        setTimeout(() => loginIdInput && loginIdInput.focus(), 150);
+      }
+
+      // Password visibility eye toggle
+      if (btnTogglePass) {
+        btnTogglePass.onclick = () => {
+          if (loginPassInput.type === "password") {
+            loginPassInput.type = "text";
+            passEyeIcon.classList.replace("fa-eye", "fa-eye-slash");
+          } else {
+            loginPassInput.type = "password";
+            passEyeIcon.classList.replace("fa-eye-slash", "fa-eye");
+          }
+        };
+      }
+
+      // Form submission for unlock
+      if (loginForm) {
+        loginForm.onsubmit = (e) => {
+          e.preventDefault();
+          const enteredId = loginIdInput.value.trim().toLowerCase();
+          const enteredPass = loginPassInput.value;
+          const currentCreds = getCredentials();
+
+          if (enteredId === currentCreds.username.toLowerCase() && enteredPass === currentCreds.password) {
+            loginErrorAlert.classList.add("hidden");
+            sessionStorage.setItem("tk_admin_authenticated", "true");
+            if (rememberMeInput.checked) {
+              localStorage.setItem("tk_admin_authenticated", "true");
+            }
+            unlockPortal();
+            App.toast("Access Granted! Welcome to Organizer Desk.", "success");
+          } else {
+            loginErrorAlert.classList.remove("hidden");
+            loginErrorText.textContent = "Incorrect Admin ID or Password. Try 'admin' / 'techkriti2026'";
+            loginCard.classList.remove("animate-shake");
+            void loginCard.offsetWidth; // trigger reflow
+            loginCard.classList.add("animate-shake");
+          }
+        };
+      }
+
+      // Logout / Lock Portal button
+      if (btnAdminLogout) {
+        btnAdminLogout.onclick = () => {
+          lockPortal();
+          App.toast("Portal safely locked.", "info");
+        };
+      }
+
+      // Change Password Dialog Handlers
+      if (btnChangePass) {
+        btnChangePass.onclick = () => {
+          const creds = getCredentials();
+          document.getElementById("input-current-pass").value = "";
+          document.getElementById("input-new-id").value = creds.username;
+          document.getElementById("input-new-pass").value = "";
+          document.getElementById("input-confirm-pass").value = "";
+          changePassError.classList.add("hidden");
+          modalChangePass.classList.remove("hidden");
+          modalChangePass.classList.add("flex");
+        };
+      }
+
+      const closeChangePassModal = () => {
+        modalChangePass.classList.add("hidden");
+        modalChangePass.classList.remove("flex");
+      };
+      if (btnCloseChangePass) btnCloseChangePass.onclick = closeChangePassModal;
+      if (btnCancelChangePass) btnCancelChangePass.onclick = closeChangePassModal;
+
+      if (formChangePass) {
+        formChangePass.onsubmit = (e) => {
+          e.preventDefault();
+          const curr = document.getElementById("input-current-pass").value;
+          const newId = document.getElementById("input-new-id").value.trim();
+          const newPass = document.getElementById("input-new-pass").value;
+          const confirmPass = document.getElementById("input-confirm-pass").value;
+          const creds = getCredentials();
+
+          if (curr !== creds.password) {
+            changePassError.classList.remove("hidden");
+            changePassErrorText.textContent = "Current password does not match!";
+            return;
+          }
+          if (newPass.length < 6) {
+            changePassError.classList.remove("hidden");
+            changePassErrorText.textContent = "New password must be at least 6 characters long.";
+            return;
+          }
+          if (newPass !== confirmPass) {
+            changePassError.classList.remove("hidden");
+            changePassErrorText.textContent = "New password and Confirm password do not match!";
+            return;
+          }
+
+          localStorage.setItem("tk_admin_credentials", JSON.stringify({
+            username: newId || "admin",
+            password: newPass
+          }));
+
+          closeChangePassModal();
+          App.toast("Credentials successfully updated!", "success");
+        };
+      }
+
+      // -------------------------------------------------------------
+      // DASHBOARD DATA CONTROLLER
+      // -------------------------------------------------------------
+      const tableBody = document.getElementById("admin-table-body");
+      const emptyState = document.getElementById("admin-empty-state");
+      const searchInput = document.getElementById("admin-search-input");
+      const filterTier = document.getElementById("admin-filter-tier");
+      const filterVerification = document.getElementById("admin-filter-verification");
+      const filterActivity = document.getElementById("admin-filter-activity");
+      const filterCheckin = document.getElementById("admin-filter-checkin");
+      const resetFiltersBtn = document.getElementById("btn-reset-filters");
+      const exportCsvBtn = document.getElementById("btn-export-csv");
+      const clearDbBtn = document.getElementById("btn-clear-db");
+
+      // Metrics elements
+      const metricReg = document.getElementById("metric-total-reg");
+      const metricDseu = document.getElementById("metric-dseu-reg");
+      const metricOutside = document.getElementById("metric-outside-reg");
+      const metricRev = document.getElementById("metric-total-rev");
+      const metricChecked = document.getElementById("metric-total-checked");
+      const metricPct = document.getElementById("metric-checkin-pct");
+
+      function updateDashboard() {
+        const allRecords = StorageManager.getAllRegistrations();
+
+        // Calculate KPIs
+        const totalReg = allRecords.length;
+        const dseuReg = allRecords.filter(r => (r.student && r.student.tier === "dseu") || Number(r.amountPaid) === 50).length;
+        const outsideReg = allRecords.filter(r => (r.student && r.student.tier === "outside") || Number(r.amountPaid) === 100).length;
+        const totalRev = allRecords.reduce((acc, curr) => acc + (Number(curr.amountPaid) || 0), 0);
+        const checkedInCount = allRecords.filter(r => r.checkedIn).length;
+        const checkinPct = totalReg > 0 ? Math.round((checkedInCount / totalReg) * 100) : 0;
+
+        if (metricReg) metricReg.textContent = totalReg;
+        if (metricDseu) metricDseu.textContent = dseuReg;
+        if (metricOutside) metricOutside.textContent = outsideReg;
+        if (metricRev) metricRev.textContent = `₹${totalRev.toLocaleString('en-IN')}`;
+        if (metricChecked) metricChecked.textContent = checkedInCount;
+        if (metricPct) metricPct.textContent = `(${checkinPct}%)`;
+
+        // Filter records
+        const query = (searchInput.value || "").toLowerCase().trim();
+        const selectedTier = filterTier.value;
+        const selectedVerif = filterVerification.value;
+        const selectedAct = filterActivity.value;
+        const selectedCheckin = filterCheckin.value;
+
+        const filtered = allRecords.filter(r => {
+          const s = r.student || {};
+          const utr = (r.utrNumber || r.transactionId || "").toLowerCase();
+          
+          const matchQuery = !query || 
+            (r.ticketNumber && r.ticketNumber.toLowerCase().includes(query)) ||
+            (s.name && s.name.toLowerCase().includes(query)) ||
+            (s.rollNumber && s.rollNumber.toLowerCase().includes(query)) ||
+            (s.phone && s.phone.includes(query)) ||
+            (s.email && s.email.toLowerCase().includes(query)) ||
+            utr.includes(query);
+
+          let matchTier = true;
+          if (selectedTier === "dseu") {
+            matchTier = s.tier === "dseu" || Number(r.amountPaid) === 50;
+          } else if (selectedTier === "outside") {
+            matchTier = s.tier === "outside" || Number(r.amountPaid) === 100;
+          }
+
+          let matchVerif = true;
+          const isVer = r.paymentVerification && r.paymentVerification.toLowerCase().includes("verified");
+          if (selectedVerif === "verified") matchVerif = isVer;
+          if (selectedVerif === "pending") matchVerif = !isVer;
+
+          const matchAct = selectedAct === "all" || r.activityId === selectedAct;
+
+          let matchCheckin = true;
+          if (selectedCheckin === "admitted") matchCheckin = !!r.checkedIn;
+          if (selectedCheckin === "pending") matchCheckin = !r.checkedIn;
+
+          return matchQuery && matchTier && matchVerif && matchAct && matchCheckin;
+        });
+
+        renderTable(filtered);
+      }
+
+      function renderTable(records) {
+        tableBody.innerHTML = "";
+
+        if (records.length === 0) {
+          emptyState.classList.remove("hidden");
+          return;
+        } else {
+          emptyState.classList.add("hidden");
+        }
+
+        records.forEach(r => {
+          const s = r.student || {};
+          const isCheckedIn = !!r.checkedIn;
+          const isDseu = s.tier === "dseu" || Number(r.amountPaid) === 50;
+          const isVerified = r.paymentVerification && r.paymentVerification.toLowerCase().includes("verified");
+          const utrText = r.utrNumber || r.transactionId || "N/A";
+          const formattedDate = r.registeredAt ? new Date(r.registeredAt).toLocaleDateString("en-IN", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "Today";
+
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-800/40 transition";
+
+          tr.innerHTML = `
+            <td class="px-4 py-3.5">
+              <span class="font-mono font-bold text-cyan-400 block">${r.ticketNumber}</span>
+              <span class="text-[10px] text-slate-500 font-mono block">${formattedDate}</span>
+            </td>
+            <td class="px-4 py-3.5">
+              <strong class="text-white block">${s.name || 'Participant'}</strong>
+              <span class="text-[11px] text-slate-400 block"><i class="fa-solid fa-phone text-[9px] mr-1 text-slate-500"></i> ${s.phone || 'N/A'}</span>
+              <span class="text-[10px] text-slate-500 font-mono truncate max-w-[140px] block">${s.email || ''}</span>
+            </td>
+            <td class="px-4 py-3.5">
+              <span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold ${isDseu ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'} mb-1">
+                ${isDseu ? 'DSEU Student (₹50)' : 'Outside College (₹100)'}
+              </span>
+              <span class="font-mono text-slate-200 block text-[11px] font-semibold">${s.rollNumber || 'N/A'}</span>
+              <span class="text-[10px] text-slate-400 block truncate max-w-[150px]">${s.campus || ''}</span>
+            </td>
+            <td class="px-4 py-3.5">
+              <span class="font-semibold text-slate-100 block">${r.activityTitle || 'Entry Pass'}</span>
+              <span class="text-[10px] text-emerald-400 font-medium block">
+                <i class="fa-solid fa-check text-[9px] mr-1"></i> Free Activity Entry
+              </span>
+            </td>
+            <td class="px-4 py-3.5">
+              <div class="flex items-center gap-1.5 mb-0.5">
+                <span class="font-bold text-emerald-400 text-xs">₹${r.amountPaid}</span>
+                <span class="text-[10px] text-slate-500">via Paytm UPI</span>
+              </div>
+              <div class="p-1.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[10px] text-slate-300">
+                <span class="text-slate-500 block text-[9px]">UTR / Ref:</span>
+                <span class="text-cyan-300 font-bold select-all">${utrText}</span>
+              </div>
+            </td>
+            <td class="px-4 py-3.5 text-center">
+              <div class="flex flex-col items-center gap-1.5">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                  isVerified 
+                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' 
+                    : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                }">
+                  ${isVerified ? '✅ VERIFIED' : '⏳ PENDING'}
+                </span>
+                <button class="btn-toggle-verif text-[11px] px-2.5 py-1 rounded-lg ${
+                  isVerified 
+                    ? 'bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white' 
+                    : 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold shadow-md shadow-emerald-600/30'
+                } transition" data-id="${r.id}">
+                  ${isVerified ? 'Mark Pending' : 'Approve UTR'}
+                </button>
+              </div>
+            </td>
+            <td class="px-4 py-3.5 text-center">
+              <button class="btn-toggle-checkin px-3 py-1 rounded-full text-xs font-bold transition flex items-center justify-center gap-1.5 mx-auto ${
+                isCheckedIn 
+                  ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 hover:bg-indigo-500/30' 
+                  : 'bg-slate-800 text-slate-400 border border-slate-700 hover:text-white hover:border-slate-500'
+              }" data-id="${r.id}">
+                <i class="fa-solid ${isCheckedIn ? 'fa-circle-check text-indigo-400' : 'fa-circle text-slate-600'}"></i>
+                <span>${isCheckedIn ? 'Admitted' : 'Check In'}</span>
+              </button>
+            </td>
+            <td class="px-4 py-3.5 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <a href="ticket.html?id=${encodeURIComponent(r.id)}" target="_blank" class="p-1.5 rounded-lg bg-slate-800 hover:bg-cyan-600 text-slate-300 hover:text-white transition" title="View Official Pass">
+                  <i class="fa-solid fa-qrcode text-xs"></i>
+                </a>
+                <button class="btn-delete-reg p-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-400 hover:text-white transition" data-id="${r.id}" title="Remove Registration">
+                  <i class="fa-solid fa-trash text-xs"></i>
+                </button>
+              </div>
+            </td>
+          `;
+
+          tableBody.appendChild(tr);
+        });
+
+        // Bind UTR verification toggle buttons
+        document.querySelectorAll(".btn-toggle-verif").forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.getAttribute("data-id");
+            StorageManager.togglePaymentVerification(id);
+            updateDashboard();
+            App.toast("Payment verification status updated!", "success");
+          };
+        });
+
+        // Bind checkin toggle buttons
+        document.querySelectorAll(".btn-toggle-checkin").forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.getAttribute("data-id");
+            StorageManager.toggleCheckIn(id);
+            updateDashboard();
+            App.toast("Attendee gate admission status updated!", "info");
+          };
+        });
+
+        // Bind delete buttons
+        document.querySelectorAll(".btn-delete-reg").forEach(btn => {
+          btn.onclick = () => {
+            const id = btn.getAttribute("data-id");
+            if (confirm("Are you sure you want to remove this registration record?")) {
+              StorageManager.deleteRegistration(id);
+              updateDashboard();
+              App.toast("Registration removed.", "info");
+            }
+          };
+        });
+      }
+
+      // Filter events
+      searchInput.oninput = updateDashboard;
+      filterTier.onchange = updateDashboard;
+      filterVerification.onchange = updateDashboard;
+      filterActivity.onchange = updateDashboard;
+      filterCheckin.onchange = updateDashboard;
+
+      resetFiltersBtn.onclick = () => {
+        searchInput.value = "";
+        filterTier.value = "all";
+        filterVerification.value = "all";
+        filterActivity.value = "all";
+        filterCheckin.value = "all";
+        updateDashboard();
+      };
+
+      // Clear all database records button
+      clearDbBtn.onclick = () => {
+        if (confirm("WARNING: This will clear all stored registrations in local storage. Continue?")) {
+          StorageManager.clearAllData();
+          updateDashboard();
+          App.toast("Database reset to clean state.", "warning");
+        }
+      };
+
+      // Export CSV
+      exportCsvBtn.onclick = () => {
+        const records = StorageManager.getAllRegistrations();
+        if (records.length === 0) return alert("No records to export.");
+
+        const headers = ["Ticket ID", "Registered Date", "Student Name", "Roll Number", "Tier (DSEU/Outside)", "Email", "Phone", "Campus/College", "Activity", "Fee Amount (INR)", "Payment Mode", "UPI UTR / Ref Number", "Verification Status", "Gate Admitted", "Admitted At"];
+        const rows = records.map(r => {
+          const s = r.student || {};
+          const isDseu = s.tier === "dseu" || Number(r.amountPaid) === 50;
+          return [
+            r.ticketNumber,
+            r.registeredAt || '',
+            `"${s.name || ''}"`,
+            s.rollNumber || '',
+            isDseu ? "DSEU Campus (₹50)" : "Outside College (₹100)",
+            s.email || '',
+            s.phone || '',
+            `"${s.campus || ''}"`,
+            `"${r.activityTitle || 'Entry Pass'}"`,
+            r.amountPaid || 0,
+            `"${r.paymentMethod || 'UPI QR'}"`,
+            `"${r.utrNumber || r.transactionId || ''}"`,
+            `"${r.paymentVerification || 'Pending'}"`,
+            r.checkedIn ? "Yes" : "No",
+            r.checkedInAt || ''
+          ].join(",");
+        });
+
+        const csvString = [headers.join(","), ...rows].join("\n");
+        const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Tech_Kriti_2026_Registrations_${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        App.toast("Participant CSV exported successfully!", "success");
+      };
+
+      // Scanner Modal
+      const scannerModal = document.getElementById("modal-scanner");
+      const openScannerBtn = document.getElementById("btn-gate-scanner");
+      const closeScannerBtn = document.getElementById("btn-close-scanner");
+      const verifyBtn = document.getElementById("btn-run-verify");
+      const queryInput = document.getElementById("scanner-query-input");
+      const resultBox = document.getElementById("scanner-result-box");
+
+      openScannerBtn.onclick = () => {
+        scannerModal.classList.remove("hidden");
+        scannerModal.classList.add("flex");
+        queryInput.focus();
+      };
+
+      closeScannerBtn.onclick = () => {
+        scannerModal.classList.add("hidden");
+        scannerModal.classList.remove("flex");
+        resultBox.classList.add("hidden");
+      };
+
+      verifyBtn.onclick = runPassVerification;
+      queryInput.onkeydown = (e) => {
+        if (e.key === "Enter") runPassVerification();
+      };
+
+      function runPassVerification() {
+        const query = queryInput.value.trim();
+        if (!query) return;
+
+        let record = StorageManager.getRegistration(query);
+        // Also check if JSON string from QR was pasted
+        if (!record && query.startsWith("{")) {
+          try {
+            const parsed = JSON.parse(query);
+            if (parsed.ticketNumber) record = StorageManager.getRegistration(parsed.ticketNumber);
+          } catch(e){}
+        }
+
+        resultBox.classList.remove("hidden");
+
+        if (record) {
+          const s = record.student || {};
+          const isDseu = s.tier === "dseu" || Number(record.amountPaid) === 50;
+          const isVerified = record.paymentVerification && record.paymentVerification.toLowerCase().includes("verified");
+
+          resultBox.innerHTML = `
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs uppercase font-mono text-cyan-400 font-bold">${record.ticketNumber}</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${record.checkedIn ? 'bg-indigo-500/20 text-indigo-300' : 'bg-emerald-500/20 text-emerald-400'}">
+                  ${record.checkedIn ? 'ALREADY ADMITTED' : 'VALID PASS'}
+                </span>
+              </div>
+              <div class="text-xs space-y-1">
+                <h4 class="text-base font-bold text-white">${s.name}</h4>
+                <p class="text-slate-400 font-mono">${s.rollNumber} • ${isDseu ? 'DSEU Campus (₹50)' : 'Outside College (₹100)'}</p>
+                <p class="text-cyan-300 font-medium">${record.activityTitle}</p>
+                <p class="text-slate-400 font-mono text-[11px]">UTR: <span class="text-white">${record.utrNumber || record.transactionId || 'N/A'}</span> (${isVerified ? 'Verified ✅' : 'Pending Verification ⏳'})</p>
+              </div>
+              <div class="pt-2 border-t border-slate-800 flex gap-2">
+                <button id="btn-modal-admit" class="w-full py-2.5 rounded-xl ${record.checkedIn ? 'bg-slate-800 text-slate-300' : 'bg-emerald-600 hover:bg-emerald-500 text-white font-bold'} text-xs transition">
+                  ${record.checkedIn ? 'Revoke Admission' : 'Admit Attendee (Check In)'}
+                </button>
+              </div>
+            </div>
+          `;
+
+          document.getElementById("btn-modal-admit").onclick = () => {
+            StorageManager.toggleCheckIn(record.id);
+            runPassVerification();
+            updateDashboard();
+            App.toast("Gate check-in recorded!", "success");
+          };
+        } else {
+          resultBox.innerHTML = `
+            <div class="text-center py-4 space-y-1">
+              <i class="fa-solid fa-triangle-exclamation text-rose-500 text-2xl"></i>
+              <h5 class="font-bold text-white text-xs">Invalid or Unregistered Pass</h5>
+              <p class="text-[11px] text-slate-500">No student match found for "${query}"</p>
+            </div>
+          `;
+        }
+      }
+
+      // Add walk-in spot registration helper
+      const walkinBtn = document.getElementById("btn-add-walkin");
+      walkinBtn.onclick = () => {
+        const name = prompt("Student Full Name:");
+        if (!name) return;
+        const roll = prompt("College Roll Number / ID:");
+        if (!roll) return;
+        const tierChoice = prompt("Student Tier? Enter '1' for DSEU Student (₹50) or '2' for Outside College (₹100):", "1");
+        const isDseu = tierChoice === "1" || tierChoice.toLowerCase().includes("dseu");
+        const fee = isDseu ? 50 : 100;
+        const utr = prompt("12-Digit UPI UTR / Ref Number (or type 'CASH'):", "SPOT" + Math.floor(1000000000 + Math.random() * 9000000000));
+
+        StorageManager.saveRegistration({
+          student: {
+            name: name,
+            rollNumber: roll,
+            email: `${roll.toLowerCase()}@college.edu`,
+            phone: "+91 99999 00000",
+            semester: "Semester 4",
+            section: "Spot Desk",
+            campus: isDseu ? "DSEU Okhla / Main Campus" : "Outside University / College",
+            tier: isDseu ? "dseu" : "outside"
+          },
+          activityId: "general",
+          activityTitle: "Festival Entry & All Events Pass",
+          category: "Festival Pass",
+          amountPaid: fee,
+          paymentMethod: `Paytm UPI (Rishab Kumar Jha)`,
+          paymentStatus: "Completed",
+          paymentVerification: "Verified",
+          transactionId: "pay_" + utr,
+          utrNumber: utr,
+          checkedIn: true
+        });
+
+        updateDashboard();
+        App.toast(`Spot pass created for ${name} (₹${fee})!`, "success");
+      };
+
+      // Initial security gate check
+      if (isUserAuthenticated()) {
+        unlockPortal();
+      } else {
+        lockPortal();
+      }
+    });
+  </script>
+</body>
+</html>
